@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { Sparkles, Sun, Moon, Monitor } from 'lucide-react';
 import { ThemeMode } from '../types';
+import { BornForThisLogo } from './BornForThisLogo';
 
 interface HeaderProps {
   theme: ThemeMode;
@@ -19,9 +21,7 @@ export const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
       {/* Top Navigation Bar */}
       <div className="absolute top-0 w-full px-6 py-6 flex justify-between items-center z-50">
         <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold tracking-tight">
-          <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
-            <span className="font-bold">B</span>
-          </div>
+          <BornForThisLogo className="w-9 h-9" />
           <span className="hidden sm:inline">BornForThis</span>
         </div>
         

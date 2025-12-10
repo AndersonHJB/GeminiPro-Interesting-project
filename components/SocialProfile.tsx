@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
-import { Youtube, MonitorPlay, Copy, Check, Globe, ArrowRight, QrCode } from 'lucide-react';
+import { Youtube, MonitorPlay, Copy, Check, ArrowRight, QrCode, ExternalLink } from 'lucide-react';
+import { BornForThisLogo } from './BornForThisLogo';
 
 interface SocialImageCardProps {
   title: string;
@@ -8,9 +9,10 @@ interface SocialImageCardProps {
   imageSrc: string;
   colorClass: string;
   bgClass: string;
+  linkUrl?: string;
 }
 
-const SocialImageCard: React.FC<SocialImageCardProps> = ({ title, value, imageSrc, colorClass, bgClass }) => {
+const SocialImageCard: React.FC<SocialImageCardProps> = ({ title, value, imageSrc, colorClass, bgClass, linkUrl }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -20,7 +22,7 @@ const SocialImageCard: React.FC<SocialImageCardProps> = ({ title, value, imageSr
   };
 
   return (
-    <div className="flex flex-col bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 relative">
+    <div className="flex flex-col bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 relative group">
         
         <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
@@ -53,17 +55,62 @@ const SocialImageCard: React.FC<SocialImageCardProps> = ({ title, value, imageSr
             </div>
         </div>
         
-        <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-950/50 border border-slate-100 dark:border-slate-800 rounded-xl p-3 pl-4 group/copy hover:border-indigo-200 dark:hover:border-indigo-900/50 transition-colors">
+        <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-950/50 border border-slate-100 dark:border-slate-800 rounded-xl p-3 pl-4 hover:border-indigo-200 dark:hover:border-indigo-900/50 transition-colors">
             <code className={`font-mono font-medium ${colorClass}`}>{value}</code>
-            <button 
-                onClick={handleCopy}
-                className="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-white dark:hover:bg-slate-800 rounded-lg transition-all shadow-sm border border-transparent hover:border-slate-100 dark:hover:border-slate-700"
-                title="点击复制"
-            >
-                {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
-            </button>
+            
+            <div className="flex items-center gap-1">
+                {linkUrl && (
+                    <a 
+                        href={linkUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-white dark:hover:bg-slate-800 rounded-lg transition-all shadow-sm border border-transparent hover:border-slate-100 dark:hover:border-slate-700"
+                        title="访问主页"
+                    >
+                        <ExternalLink className="w-4 h-4" />
+                    </a>
+                )}
+                <button 
+                    onClick={handleCopy}
+                    className="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-white dark:hover:bg-slate-800 rounded-lg transition-all shadow-sm border border-transparent hover:border-slate-100 dark:hover:border-slate-700"
+                    title="点击复制"
+                >
+                    {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                </button>
+            </div>
         </div>
     </div>
+  );
+};
+
+interface SocialLinkCardProps {
+  title: string;
+  url: string;
+  icon: React.ReactNode;
+  bgClass: string;
+  textClass: string;
+}
+
+const SocialLinkCard: React.FC<SocialLinkCardProps> = ({ title, url, icon, bgClass, textClass }) => {
+  return (
+    <a 
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex items-center justify-between p-5 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-2xl hover:shadow-md transition-all duration-300 hover:border-indigo-500/20"
+    >
+      <div className="flex items-center gap-4">
+        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${bgClass} ${textClass} font-bold text-xl transition-transform duration-300 group-hover:scale-110`}>
+          {icon}
+        </div>
+        <span className="font-bold text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white text-lg transition-colors">
+          {title}
+        </span>
+      </div>
+      <div className="p-2 rounded-full text-slate-300 group-hover:text-indigo-600 group-hover:bg-indigo-50 dark:group-hover:bg-indigo-500/10 transition-all">
+        <ExternalLink className="w-5 h-5" />
+      </div>
+    </a>
   );
 };
 
@@ -97,7 +144,7 @@ export const SocialProfile: React.FC = () => {
                     <div className="relative z-10">
                         <div className="flex items-start justify-between mb-8">
                             <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20">
-                                <Globe className="w-8 h-8 text-indigo-100" />
+                                <BornForThisLogo className="w-8 h-8" />
                             </div>
                             <span className="flex items-center gap-1 text-sm font-medium text-indigo-200 group-hover:text-white transition-colors">
                                 访问官网 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -148,7 +195,7 @@ export const SocialProfile: React.FC = () => {
                 </div>
             </div>
 
-            {/* 3. Social Media Grid (WeChat / Public Account / RedNote) */}
+            {/* 3. Social Media Grid (WeChat / Public Account / RedNote / Video Channel / Store) */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <SocialImageCard 
                     title="微信 (WeChat)"
@@ -170,6 +217,46 @@ export const SocialProfile: React.FC = () => {
                     imageSrc="https://cdn.bornforthis.cn/images/01-%E5%B0%8F%E7%BA%A2%E4%B9%A6%E4%BA%8C%E7%BB%B4%E7%A0%81.JPG"
                     bgClass="bg-[#FF2442]/10"
                     colorClass="text-[#FF2442]"
+                    linkUrl="https://www.xiaohongshu.com/user/profile/5e413a430000000001000f4c"
+                />
+                <SocialImageCard 
+                    title="微信视频号"
+                    value="AI悦创"
+                    imageSrc="https://cdn.bornforthis.cn/images/05-%E5%BE%AE%E4%BF%A1%E8%A7%86%E9%A2%91%E5%8F%B7.JPG"
+                    bgClass="bg-[#FA9D3B]/10"
+                    colorClass="text-[#FA9D3B]"
+                />
+                <SocialImageCard 
+                    title="微信小店"
+                    value="AI悦创"
+                    imageSrc="https://cdn.bornforthis.cn/images/04-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E5%BA%97.jpg"
+                    bgClass="bg-[#28C445]/10"
+                    colorClass="text-[#28C445]"
+                />
+            </div>
+
+            {/* 4. Social Links Grid (Zhihu / Weibo / CSDN) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                <SocialLinkCard 
+                    title="知乎"
+                    url="https://www.zhihu.com/people/aiyuechuang"
+                    icon="知"
+                    bgClass="bg-[#0084FF]/10"
+                    textClass="text-[#0084FF]"
+                />
+                <SocialLinkCard 
+                    title="微博"
+                    url="https://weibo.com/u/5673898686"
+                    icon="微"
+                    bgClass="bg-[#E6162D]/10"
+                    textClass="text-[#E6162D]"
+                />
+                 <SocialLinkCard 
+                    title="CSDN"
+                    url="https://www.csdn.net/"
+                    icon="C"
+                    bgClass="bg-[#FC5531]/10"
+                    textClass="text-[#FC5531]"
                 />
             </div>
         </div>
