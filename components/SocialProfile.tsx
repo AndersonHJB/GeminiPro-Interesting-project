@@ -30,9 +30,10 @@ interface CompactQRItemProps {
   qrImageSrc: string;
   accentColor: string; // e.g. text-green-500
   linkUrl?: string;
+  hideCopy?: boolean;
 }
 
-const CompactQRItem: React.FC<CompactQRItemProps> = ({ icon, title, value, qrImageSrc, accentColor, linkUrl }) => {
+const CompactQRItem: React.FC<CompactQRItemProps> = ({ icon, title, value, qrImageSrc, accentColor, linkUrl, hideCopy }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -70,13 +71,15 @@ const CompactQRItem: React.FC<CompactQRItemProps> = ({ icon, title, value, qrIma
         )}
 
         {/* Copy Button */}
-        <button 
-            onClick={handleCopy}
-            className="p-1.5 text-slate-400 hover:text-emerald-500 rounded-md transition-colors"
-            title="复制内容"
-        >
-            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-        </button>
+        {!hideCopy && (
+            <button 
+                onClick={handleCopy}
+                className="p-1.5 text-slate-400 hover:text-emerald-500 rounded-md transition-colors"
+                title="复制内容"
+            >
+                {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+            </button>
+        )}
 
         {/* QR Popover Trigger */}
         <div className="relative group/qr">
@@ -282,6 +285,7 @@ export const SocialProfile: React.FC = () => {
                         value="扫码加入"
                         qrImageSrc="https://cdn.bornforthis.cn/images/03-%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.JPG"
                         accentColor="text-indigo-500"
+                        hideCopy={true}
                     />
                     <CompactQRItem 
                         icon={<Heart className="w-4 h-4" />}
@@ -289,6 +293,7 @@ export const SocialProfile: React.FC = () => {
                         value="感谢支持"
                         qrImageSrc="https://cdn.bornforthis.cn/images/06-%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg"
                         accentColor="text-[#28C445]"
+                        hideCopy={true}
                     />
                     <CompactQRItem 
                         icon={<Coffee className="w-4 h-4" />}
@@ -296,6 +301,7 @@ export const SocialProfile: React.FC = () => {
                         value="请喝咖啡"
                         qrImageSrc="https://cdn.bornforthis.cn/images/07-%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg"
                         accentColor="text-[#1677FF]"
+                        hideCopy={true}
                     />
                 </div>
             </div>
