@@ -1,7 +1,10 @@
 
 import React from 'react';
 import { Project } from '../types';
-import { ArrowUpRight, Cpu, Eye, Terminal, Mic, Box, Sparkles, Github, BookOpen, Globe } from 'lucide-react';
+import { 
+  ArrowUpRight, Cpu, Eye, Terminal, Mic, Box, Sparkles, Github, BookOpen, Globe,
+  Palette, LineChart, Gamepad2, Wifi, Code, Music, Leaf, Shield, Activity
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 
 // Icon mapping helper
@@ -12,6 +15,15 @@ const getIcon = (name: string) => {
     case 'Terminal': return <Terminal className="w-5 h-5" />;
     case 'Mic': return <Mic className="w-5 h-5" />;
     case 'Sparkles': return <Sparkles className="w-5 h-5" />;
+    case 'Palette': return <Palette className="w-5 h-5" />;
+    case 'LineChart': return <LineChart className="w-5 h-5" />;
+    case 'Gamepad2': return <Gamepad2 className="w-5 h-5" />;
+    case 'Wifi': return <Wifi className="w-5 h-5" />;
+    case 'Code': return <Code className="w-5 h-5" />;
+    case 'Music': return <Music className="w-5 h-5" />;
+    case 'Leaf': return <Leaf className="w-5 h-5" />;
+    case 'Shield': return <Shield className="w-5 h-5" />;
+    case 'Activity': return <Activity className="w-5 h-5" />;
     default: return <Box className="w-5 h-5" />;
   }
 };
@@ -44,9 +56,11 @@ interface ProjectCardProps {
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   return (
     <motion.div
+      layout // Enable smooth layout transitions when grid changes
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
       className="group relative flex flex-col h-full"
     >
       {/* Glow Effect */}

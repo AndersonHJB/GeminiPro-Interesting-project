@@ -6,9 +6,38 @@ import { Footer } from './components/Footer';
 import { SocialProfile } from './components/SocialProfile';
 import { PROJECTS } from './constants';
 import { ThemeMode } from './types';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { AnimatePresence } from 'framer-motion';
+
+const ITEMS_PER_PAGE = 6;
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState<ThemeMode>('system');
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Pagination Logic
+  const totalPages = Math.ceil(PROJECTS.length / ITEMS_PER_PAGE);
+  const currentProjects = PROJECTS.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Smooth scroll to top of grid
+    const grid = document.getElementById('project-grid');
+    if (grid) {
+      // Offset for header
+      const headerOffset = 100;
+      const elementPosition = grid.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
 
   // Initialize theme from localStorage
   useEffect(() => {
@@ -77,11 +106,54 @@ const App: React.FC = () => {
       <Header theme={theme} toggleTheme={toggleTheme} />
       
       <main className="flex-grow container mx-auto px-6 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-20">
-          {PROJECTS.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
+        <div id="project-grid" className="scroll-mt-32 min-h-[800px]">
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
+               <AnimatePresence mode="popLayout">
+                  {currentProjects.map((project, index) => (
+                    <ProjectCard key={project.id} project={project} index={index} />
+                  ))}
+               </AnimatePresence>
+            </div>
         </div>
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-4 mb-20">
+            <button
+              onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+              disabled={currentPage === 1}
+              className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              aria-label="Previous Page"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            
+            <div className="flex gap-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  className={`w-10 h-10 rounded-lg font-medium transition-all ${
+                    currentPage === page
+                      ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
+                      : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-700'
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+              disabled={currentPage === totalPages}
+              className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              aria-label="Next Page"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        )}
         
         {/* Divider */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-800 to-transparent mb-12"></div>

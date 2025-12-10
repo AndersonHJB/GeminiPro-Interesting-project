@@ -48,7 +48,7 @@ export const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
         </h1>
         
         <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-          这里收集了我基于 Gemini 和最前沿 Web 技术构建的 AI 实验项目、交互界面和创意作品。
+          这里汇总了我基于 Gemini 和最前沿 Web 技术构建的 AI 实验项目、交互界面和创意作品。（含自己研发的有趣项目）
         </p>
       </div>
     </header>
