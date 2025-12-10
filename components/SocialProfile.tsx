@@ -128,6 +128,34 @@ const CompactLinkItem: React.FC<CompactLinkItemProps> = ({ icon, title, url, hov
   );
 };
 
+// --- Direct QR Card for Support Section ---
+
+interface DirectQRCardProps {
+  icon: React.ReactNode;
+  title: string;
+  value: string;
+  qrImageSrc: string;
+  accentColor: string;
+}
+
+const DirectQRCard: React.FC<DirectQRCardProps> = ({ icon, title, value, qrImageSrc, accentColor }) => {
+  return (
+    <div className="flex flex-col items-center justify-center p-6 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-700/50 hover:bg-white dark:hover:bg-slate-800 transition-colors h-full">
+      <div className={`flex items-center gap-2 mb-4 ${accentColor}`}>
+        {icon}
+        <span className="font-bold text-slate-700 dark:text-slate-200">{title}</span>
+      </div>
+      
+      <div className="w-40 h-40 bg-white p-2 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 mb-3 overflow-hidden">
+        <img src={qrImageSrc} alt={title} className="w-full h-full object-contain" />
+      </div>
+      
+      <span className="text-xs text-slate-400 font-medium">{value}</span>
+    </div>
+  );
+};
+
+
 // --- Main Component ---
 
 export const SocialProfile: React.FC = () => {
@@ -279,29 +307,26 @@ export const SocialProfile: React.FC = () => {
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-2 p-2">
-                     <CompactQRItem 
-                        icon={<Users className="w-4 h-4" />}
+                     <DirectQRCard 
+                        icon={<Users className="w-5 h-5" />}
                         title="加入交流群"
                         value="扫码加入"
                         qrImageSrc="https://cdn.bornforthis.cn/images/03-%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.JPG"
                         accentColor="text-indigo-500"
-                        hideCopy={true}
                     />
-                    <CompactQRItem 
-                        icon={<Heart className="w-4 h-4" />}
+                    <DirectQRCard 
+                        icon={<Heart className="w-5 h-5" />}
                         title="微信赞助"
                         value="感谢支持"
                         qrImageSrc="https://cdn.bornforthis.cn/images/06-%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg"
                         accentColor="text-[#28C445]"
-                        hideCopy={true}
                     />
-                    <CompactQRItem 
-                        icon={<Coffee className="w-4 h-4" />}
+                    <DirectQRCard 
+                        icon={<Coffee className="w-5 h-5" />}
                         title="支付宝赞助"
                         value="请喝咖啡"
                         qrImageSrc="https://cdn.bornforthis.cn/images/07-%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg"
                         accentColor="text-[#1677FF]"
-                        hideCopy={true}
                     />
                 </div>
             </div>
