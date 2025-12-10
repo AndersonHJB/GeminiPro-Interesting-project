@@ -13,7 +13,11 @@ import {
   Video,
   Globe,
   Feather,
-  Hash
+  Hash,
+  Users,
+  Heart,
+  Coffee,
+  HandHeart
 } from 'lucide-react';
 import { BornForThisLogo } from './BornForThisLogo';
 
@@ -69,7 +73,7 @@ const CompactQRItem: React.FC<CompactQRItemProps> = ({ icon, title, value, qrIma
         <button 
             onClick={handleCopy}
             className="p-1.5 text-slate-400 hover:text-emerald-500 rounded-md transition-colors"
-            title="复制 ID"
+            title="复制内容"
         >
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
         </button>
@@ -81,9 +85,12 @@ const CompactQRItem: React.FC<CompactQRItemProps> = ({ icon, title, value, qrIma
             </button>
 
             {/* Popover */}
-            <div className="absolute bottom-full right-0 mb-2 w-40 p-2 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 opacity-0 invisible group-hover/qr:opacity-100 group-hover/qr:visible transition-all duration-200 transform origin-bottom-right translate-y-2 group-hover/qr:translate-y-0 z-50 pointer-events-none">
-                 <div className="aspect-square bg-white rounded-lg overflow-hidden">
+            <div className="absolute bottom-full right-0 mb-2 w-48 p-2 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 opacity-0 invisible group-hover/qr:opacity-100 group-hover/qr:visible transition-all duration-200 transform origin-bottom-right translate-y-2 group-hover/qr:translate-y-0 z-50 pointer-events-none">
+                 <div className="aspect-square bg-white rounded-lg overflow-hidden relative">
                      <img src={qrImageSrc} alt="QR Code" className="w-full h-full object-contain" />
+                 </div>
+                 <div className="text-center text-[10px] text-slate-400 mt-1">
+                    使用微信/支付宝扫码
                  </div>
             </div>
         </div>
@@ -149,9 +156,8 @@ export const SocialProfile: React.FC = () => {
                     <div className="absolute top-0 right-0 -mt-16 -mr-16 w-48 h-48 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-all duration-700" />
                     
                     <div className="relative z-10 flex-grow">
-                        <div className="w-16 h-16 mb-6 rounded-full bg-white/5 backdrop-blur-sm p-1 shadow-inner">
-                            <BornForThisLogo className="w-full h-full text-white" />
-                        </div>
+                        {/* Direct Logo Display: Large, Clean, No Box */}
+                        <BornForThisLogo className="w-20 h-20 mb-6 drop-shadow-md" />
                         
                         <h3 className="text-2xl font-bold mb-2">AI悦创编程私教官网</h3>
                         <p className="text-indigo-100 text-sm leading-relaxed opacity-90 mb-8">
@@ -256,6 +262,40 @@ export const SocialProfile: React.FC = () => {
                         title="微博 (动态)"
                         url="https://weibo.com/u/5673898686"
                         hoverColorClass="group-hover:text-[#E6162D]"
+                    />
+                </div>
+            </div>
+
+            {/* Column 4: Support & Community (Span 12) */}
+            <div className="lg:col-span-12 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-2xl p-2 flex flex-col">
+                 <div className="px-4 py-4 border-b border-slate-100 dark:border-slate-800 mb-2">
+                    <h3 className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <HandHeart className="w-5 h-5 text-rose-500" />
+                        支持与交流
+                    </h3>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 p-2">
+                     <CompactQRItem 
+                        icon={<Users className="w-4 h-4" />}
+                        title="加入交流群"
+                        value="扫码加入"
+                        qrImageSrc="https://cdn.bornforthis.cn/images/03-%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.JPG"
+                        accentColor="text-indigo-500"
+                    />
+                    <CompactQRItem 
+                        icon={<Heart className="w-4 h-4" />}
+                        title="微信赞助"
+                        value="感谢支持"
+                        qrImageSrc="https://cdn.bornforthis.cn/images/06-%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE%E7%A0%81.jpg"
+                        accentColor="text-[#28C445]"
+                    />
+                    <CompactQRItem 
+                        icon={<Coffee className="w-4 h-4" />}
+                        title="支付宝赞助"
+                        value="请喝咖啡"
+                        qrImageSrc="https://cdn.bornforthis.cn/images/07-%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E6%AC%BE%E7%A0%81.jpg"
+                        accentColor="text-[#1677FF]"
                     />
                 </div>
             </div>
