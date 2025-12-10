@@ -21,7 +21,7 @@ export const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
       {/* Top Navigation Bar */}
       <div className="absolute top-0 w-full px-6 py-6 flex justify-between items-center z-50">
         <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold tracking-tight">
-          <BornForThisLogo className="w-9 h-9" />
+          <BornForThisLogo className="w-10 h-10" />
           <span className="hidden sm:inline">BornForThis</span>
         </div>
         

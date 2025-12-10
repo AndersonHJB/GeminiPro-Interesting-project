@@ -143,9 +143,11 @@ export const SocialProfile: React.FC = () => {
                     
                     <div className="relative z-10">
                         <div className="flex items-start justify-between mb-8">
-                            <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20">
-                                <BornForThisLogo className="w-8 h-8" />
+                            {/* Direct Logo Display */}
+                            <div className="rounded-full shadow-lg">
+                                <BornForThisLogo className="w-14 h-14" />
                             </div>
+
                             <span className="flex items-center gap-1 text-sm font-medium text-indigo-200 group-hover:text-white transition-colors">
                                 访问官网 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </span>
