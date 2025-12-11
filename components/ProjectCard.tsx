@@ -2,7 +2,7 @@
 import React from 'react';
 import { Project } from '../types';
 import { 
-  ArrowUpRight, Cpu, Eye, Terminal, Mic, Box, Sparkles, Github, BookOpen, Globe,
+  Cpu, Eye, Terminal, Mic, Box, Sparkles, Github, BookOpen, Globe,
   Palette, LineChart, Gamepad2, Wifi, Code, Music, Leaf, Shield, Activity
 } from 'lucide-react';
 import { motion } from 'framer-motion';
