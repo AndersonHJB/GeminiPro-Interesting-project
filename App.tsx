@@ -6,7 +6,7 @@ import { Footer } from './components/Footer';
 import { SocialProfile } from './components/SocialProfile';
 import { PROJECTS } from './constants';
 import { ThemeMode } from './types';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowUp, ArrowDown } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 
 const ITEMS_PER_PAGE = 6;
@@ -14,6 +14,7 @@ const ITEMS_PER_PAGE = 6;
 const App: React.FC = () => {
   const [theme, setTheme] = useState<ThemeMode>('system');
   const [currentPage, setCurrentPage] = useState(1);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Pagination Logic
   const totalPages = Math.ceil(PROJECTS.length / ITEMS_PER_PAGE);
@@ -37,6 +38,28 @@ const App: React.FC = () => {
         behavior: "smooth"
       });
     }
+  };
+
+  // Scroll visibility logic
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToBottom = () => {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
   };
 
   // Initialize theme from localStorage
@@ -181,6 +204,26 @@ const App: React.FC = () => {
         </main>
 
         <Footer />
+
+        {/* Floating Navigation Controls */}
+        <div className="fixed bottom-8 right-8 z-50 flex flex-col gap-3">
+          <button
+            onClick={scrollToTop}
+            className={`p-3 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 shadow-lg text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 hover:shadow-indigo-500/20 transition-all duration-300 transform ${showScrollTop ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0 pointer-events-none'}`}
+            aria-label="回到顶部"
+          >
+            <ArrowUp className="w-5 h-5" />
+          </button>
+
+          <button
+            onClick={scrollToBottom}
+            className="p-3 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 shadow-lg text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 hover:shadow-indigo-500/20 transition-all duration-300 transform hover:scale-105"
+            aria-label="滑到底部"
+          >
+            <ArrowDown className="w-5 h-5" />
+          </button>
+        </div>
+
       </div>
     </div>
   );
