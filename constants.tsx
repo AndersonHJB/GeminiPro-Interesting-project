@@ -10,7 +10,7 @@ export const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/AndersonHJB/jarvis-holographic-ui', // Replace with actual
     articleUrl: 'https://bornforthis.cn/column/Python-Programming-Course/P10-Share/Interesting-project/01-Gemini3-jarvis-holographic-ui.html', // Replace with actual
     // thumbnailUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800',
-    thumbnailUrl: 'https://cdn.bornforthis.cn/images/GeminiWeb/P01-%E8%B4%BE%E7%BB%B4%E6%96%AF.png',
+    thumbnailUrl: 'https://gemini.bornforthis.cn/images/P01-%E8%B4%BE%E7%BB%B4%E6%96%AF.png',
     tags: ['React', 'TypeScript', 'Three.js', 'React Three Fiber', 'MediaPipe', 'Tailwind CSS'],
     iconName: 'Cpu',
     status: 'live',
@@ -25,7 +25,7 @@ export const PROJECTS: Project[] = [
     tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Web Audio API', 'Game Development'],
     iconName: 'Sparkles',
     status: 'beta',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800',
+    thumbnailUrl: 'https://gemini.bornforthis.cn/images/P02-ReadyGoDuel.png',
   },
   // {
   //   id: 'vision-analyzer',
