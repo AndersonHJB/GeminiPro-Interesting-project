@@ -6,7 +6,7 @@
 # =========================
 
 # 👉 固定分支名（只改这里）
-FIXED_BRANCH="dev-experiment"
+FIXED_BRANCH="copy"
 
 # 提交信息（可选）
 COMMIT_MSG=${1:-"auto commit"}
