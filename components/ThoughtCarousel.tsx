@@ -15,7 +15,7 @@ interface Thought {
 const THOUGHTS: Thought[] = [
   {
     id: 1,
-    date: '2024.05.20',
+    date: '2025.12.12',
     title: '真正的第一步',
     content: (
       <>
@@ -65,7 +65,7 @@ const THOUGHTS: Thought[] = [
   },
   {
     id: 2,
-    date: '2024.05.22',
+    date: '2025.12.13',
     title: 'AI 是能力的放大器',
     content: (
       <>
@@ -83,7 +83,7 @@ const THOUGHTS: Thought[] = [
   },
   {
     id: 3,
-    date: '2024.05.25',
+    date: '2025.12.14',
     title: '代码的审美',
     content: (
       <>
@@ -101,7 +101,7 @@ const THOUGHTS: Thought[] = [
   },
   {
     id: 4,
-    date: '2024.06.01',
+    date: '2025.12.16',
     title: '构建者思维 (Builder\'s Mindset)',
     content: (
       <>
@@ -118,7 +118,7 @@ const THOUGHTS: Thought[] = [
   },
   {
     id: 5,
-    date: '2024.06.08',
+    date: '2025.12.17',
     title: '失败的调试价值',
     content: (
       <>
@@ -135,7 +135,7 @@ const THOUGHTS: Thought[] = [
   },
   {
     id: 6,
-    date: '2024.06.15',
+    date: '2025.12.19',
     title: '全栈的真正含义',
     content: (
       <>
@@ -152,7 +152,7 @@ const THOUGHTS: Thought[] = [
   },
   {
     id: 7,
-    date: '2024.06.22',
+    date: '2025.12.20',
     title: '守·破·离',
     content: (
       <>
@@ -170,7 +170,7 @@ const THOUGHTS: Thought[] = [
   },
   {
     id: 8,
-    date: '2024.07.05',
+    date: '2025.12.22',
     title: '输出倒逼输入',
     content: (
       <>
@@ -188,7 +188,7 @@ const THOUGHTS: Thought[] = [
   },
   {
     id: 9,
-    date: '2024.07.12',
+    date: '2025.12.23',
     title: '长期主义 vs 短期快感',
     content: (
       <>
@@ -203,7 +203,7 @@ const THOUGHTS: Thought[] = [
   },
   {
     id: 10,
-    date: '2024.08.01',
+    date: '2025.12.24',
     title: 'Stay Hungry, Stay Foolish',
     content: (
       <>
