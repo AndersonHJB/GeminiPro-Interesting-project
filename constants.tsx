@@ -19,7 +19,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'ReadyGoDuel',
     title: 'Ready Go Duel',
-    description: '基于 Google Gemini API 构建的下一代对话式 AI 助手，支持多模态输入。',
+    description: 'Ready Go Duel 是一款基于 React 开发的趣味双人反应竞技游戏，创新支持触屏点击与语音呐喊两种对战模式，并内置了防抢跑检测、毫秒级计时及彩头惩罚系统。',
     url: 'https://gemini.bornforthis.cn/ReadyGoDuel/',
     githubUrl: 'https://github.com/AndersonHJB/ReadyGoDuel',
     tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Web Audio API', 'Game Development'],
