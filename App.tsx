@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { ProjectCard } from './components/ProjectCard';
 import { Footer } from './components/Footer';
 import { SocialProfile } from './components/SocialProfile';
+import { ManifestoSection } from './components/ManifestoSection';
 import { PROJECTS } from './constants';
 import { ThemeMode } from './types';
 import { ChevronLeft, ChevronRight, ArrowUp, ArrowDown } from 'lucide-react';
@@ -199,6 +200,12 @@ const App: React.FC = () => {
           
           {/* Divider */}
           <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-800 to-transparent mb-12 opacity-50"></div>
+
+          {/* New Manifesto Section Added Here */}
+          <ManifestoSection />
+
+          {/* Divider below manifesto to separate from social */}
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-800 to-transparent my-12 opacity-50"></div>
 
           <SocialProfile />
         </main>
