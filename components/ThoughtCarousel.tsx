@@ -25,6 +25,11 @@ const THOUGHTS: Thought[] = [
           <span className="text-slate-900 dark:text-white font-bold decoration-indigo-500/30 underline decoration-2 underline-offset-4">观察、体验这个项目</span>，
           自己能不能表达出来，做出一个小 Demo 出来。这才是有效的练习、学习、体验。
         </p>
+
+        <div className="my-6 pl-4 border-l-4 border-indigo-500/30 italic text-slate-500 dark:text-slate-400 text-sm sm:text-base bg-indigo-50/50 dark:bg-indigo-900/10 py-3 rounded-r-lg">
+           “你要原版提示词干什么？是为了做一个一模一样的？那倒不用，全部代码开源、全部部署上线，你都可以用！”
+        </div>
+
         <p className="mt-4">
           一个好的提示词，或许可以快速复现，或者是成功的第一步。但不是你真正拥抱未来科技的第一步，真正的第一步是：
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 font-bold mx-1">
@@ -32,9 +37,31 @@ const THOUGHTS: Thought[] = [
           </span>
           ！
         </p>
+
+        <p className="mt-4">
+          AI 再厉害也没有什么“神词”，一下就得到一个很复杂的项目。而是通过观察，<span className="text-slate-900 dark:text-white font-semibold">一次次的表达去修正</span>，以至于达到自己想要的功能。
+        </p>
+
+        <p className="mt-6 font-handwriting text-xl text-indigo-600 dark:text-indigo-400 text-center sm:text-left rotate-[-1deg]">
+          愿你我皆能把自己心中所想，所思表达好～
+        </p>
+
+        <p className="mt-6">
+          你要通过我的项目，触发属于自己的 <span className="font-bold text-slate-900 dark:text-white">idea💡</span>。去用 AI 创造属于你的创作，这才是<span className="font-bold text-slate-900 dark:text-white">破圈</span>！
+        </p>
+
+        <div className="mt-8 p-5 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-800/50 rounded-2xl border border-indigo-100 dark:border-slate-700/50 text-sm sm:text-base shadow-sm">
+            <div className="flex items-center gap-2 mb-2 text-indigo-700 dark:text-indigo-300 font-bold">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 text-xs">🚀</span>
+                本网站支持投稿
+            </div>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                可以把你觉得有意思的项目源代码提交给我。我会进行评估，评估通过，我会帮你进行部署。<br/>
+                <span className="block mt-2 font-medium text-indigo-600/80 dark:text-indigo-400/80">欢迎投稿～（本网站非盈利性，愿我们一起共创！）</span>
+            </p>
+        </div>
       </>
     ),
-    highlight: '你要原版提示词干什么？是为了做一个一模一样的？那倒不用，全部代码开源、全部部署上线，你都可以用！'
   },
   {
     id: 2,
@@ -315,7 +342,7 @@ export const ThoughtCarousel: React.FC = () => {
                         {currentThought.content}
                     </div>
                     
-                    {/* Highlight Box */}
+                    {/* Highlight Box (Conditional Rendering) */}
                     {currentThought.highlight && (
                         <div className="pl-4 border-l-4 border-indigo-500/30 italic text-slate-500 dark:text-slate-400 text-sm sm:text-base bg-indigo-50/50 dark:bg-indigo-900/10 py-2 rounded-r-lg">
                             “{currentThought.highlight}”
