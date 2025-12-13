@@ -225,6 +225,11 @@ const THOUGHTS: Thought[] = [
 export const ThoughtCarousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  // Minimum swipe distance required
+  const minSwipeDistance = 50;
 
   const nextSlide = () => {
     setDirection(1);
@@ -234,6 +239,29 @@ export const ThoughtCarousel: React.FC = () => {
   const prevSlide = () => {
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + THOUGHTS.length) % THOUGHTS.length);
+  };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null); // Reset touch end
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
   };
 
   const currentThought = THOUGHTS[currentIndex];
@@ -260,7 +288,12 @@ export const ThoughtCarousel: React.FC = () => {
 
   return (
     <section className="py-12 relative group/carousel">
-      <div className="relative rounded-3xl overflow-hidden bg-white/40 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/60 shadow-xl transition-all duration-500 hover:shadow-2xl hover:bg-white/50 dark:hover:bg-slate-900/50">
+      <div 
+        className="relative rounded-3xl overflow-hidden bg-white/40 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/60 shadow-xl transition-all duration-500 hover:shadow-2xl hover:bg-white/50 dark:hover:bg-slate-900/50"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         
         {/* Background Decorative Elements */}
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-indigo-500/10 rounded-full blur-[80px]" />
