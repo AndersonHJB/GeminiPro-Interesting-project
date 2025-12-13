@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { X, Github, Globe, Tag, BookOpen } from 'lucide-react';
+import { X, Github, Globe, Tag, BookOpen, ExternalLink, ArrowRight } from 'lucide-react';
 import { marked } from 'marked';
 import { Project } from '../types';
 import { WalineSection } from './WalineSection';
@@ -63,7 +63,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       >
         {/* Header (Sticky) */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-10 sticky top-0">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white truncate pr-4">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white truncate pr-4 flex items-center gap-2">
             {project.title}
           </h2>
           <button
@@ -79,7 +79,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           
           {/* Thumbnail (if exists) */}
           {project.thumbnailUrl && (
-            <div className="w-full h-48 sm:h-72 rounded-2xl overflow-hidden mb-8 border border-slate-100 dark:border-slate-800">
+            <div className="w-full h-48 sm:h-80 rounded-2xl overflow-hidden mb-8 border border-slate-100 dark:border-slate-800 shadow-md">
               <img 
                 src={project.thumbnailUrl} 
                 alt={project.title} 
@@ -88,34 +88,59 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             </div>
           )}
 
-          {/* Meta Info & Actions */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
+          {/* Meta Info & Actions Area */}
+          <div className="flex flex-col gap-6 mb-8">
+            
+            {/* 1. Tags Row */}
             <div className="flex flex-wrap gap-2">
               {project.tags.map(tag => (
-                <span key={tag} className="flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-500/20">
+                <span key={tag} className="flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
                   <Tag className="w-3 h-3" />
                   {tag}
                 </span>
               ))}
             </div>
 
-            <div className="flex items-center gap-3">
-                {project.githubUrl && (
-                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-sm font-medium">
-                        <Github className="w-4 h-4" />
-                        源码
-                    </a>
-                )}
-                {project.articleUrl && (
-                    <a href={project.articleUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-sm font-medium">
-                        <BookOpen className="w-4 h-4" />
-                        文章
-                    </a>
-                )}
-                <a href={project.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors text-sm font-medium shadow-sm shadow-indigo-500/30">
+            {/* 2. Action Buttons Row - Redesigned */}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
+                
+                {/* Primary: Visit Project */}
+                <a 
+                    href={project.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-95 transition-all duration-200 group"
+                >
                     <Globe className="w-4 h-4" />
-                    访问项目
+                    <span>访问项目</span>
+                    <ArrowRight className="w-4 h-4 opacity-70 group-hover:translate-x-1 transition-transform" />
                 </a>
+
+                {/* Secondary: GitHub */}
+                {project.githubUrl && (
+                    <a 
+                        href={project.githubUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-slate-900 transition-all duration-200"
+                    >
+                        <Github className="w-4 h-4" />
+                        <span>源码</span>
+                    </a>
+                )}
+
+                {/* Tertiary: Article */}
+                {project.articleUrl && (
+                    <a 
+                        href={project.articleUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 font-medium hover:border-indigo-500 hover:text-indigo-600 dark:hover:border-indigo-400 dark:hover:text-indigo-400 bg-white dark:bg-transparent transition-all duration-200"
+                    >
+                        <BookOpen className="w-4 h-4" />
+                        <span>文章</span>
+                    </a>
+                )}
             </div>
           </div>
 
