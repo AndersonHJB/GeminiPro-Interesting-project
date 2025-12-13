@@ -7,7 +7,6 @@ git commit . -m "update"
 git push -u origin main
 # git push -u githubcopy main
 # yarn run docs:build
-mpm install
 npm run build
 
 set -e
