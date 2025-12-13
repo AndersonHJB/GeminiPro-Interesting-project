@@ -51,12 +51,13 @@ const getStatusText = (status: Project['status']) => {
 interface ProjectCardProps {
   project: Project;
   index: number;
+  onClick: (project: Project) => void;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClick }) => {
   return (
     <motion.div
-      layout // Enable smooth layout transitions when grid changes
+      layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
@@ -66,10 +67,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       {/* Glow Effect */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500/0 via-purple-500/0 to-blue-500/0 group-hover:from-indigo-500/10 group-hover:via-purple-500/10 group-hover:to-blue-500/10 dark:group-hover:from-indigo-500/20 dark:group-hover:via-purple-500/20 dark:group-hover:to-blue-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none" />
       
-      <div className="relative h-full flex flex-col bg-white dark:bg-slate-900/50 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300 shadow-sm hover:shadow-md dark:shadow-none">
+      {/* Main Card Container with Click Handler - Opens Modal */}
+      <div 
+        onClick={() => onClick(project)}
+        className="relative h-full flex flex-col bg-white dark:bg-slate-900/50 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300 shadow-sm hover:shadow-md dark:shadow-none cursor-pointer"
+      >
         
-        {/* Clickable Thumbnail Area -> Goes to Main URL */}
-        <a href={project.url} className="block relative cursor-pointer overflow-hidden">
+        {/* Thumbnail Area */}
+        <div className="block relative overflow-hidden">
             {project.thumbnailUrl ? (
             <div className="h-48 w-full relative border-b border-slate-100 dark:border-slate-800/50">
                 <div className="absolute inset-0 bg-slate-200 dark:bg-slate-800 animate-pulse" />
@@ -88,31 +93,30 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                 </div>
             </div>
             )}
-        </a>
+        </div>
 
         <div className="p-6 flex flex-col flex-grow">
-          {/* Header */}
+          {/* Header & Status */}
           <div className="flex justify-between items-start mb-4">
+             {/* Icon fallback if no thumbnail */}
              {!project.thumbnailUrl && (
                 <div className={`p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300`}>
                   {getIcon(project.iconName)}
                 </div>
              )}
-             {project.thumbnailUrl && (
-                 // Spacer to keep layout consistent if we want status on right
-                 <div className="flex-1"></div>
-             )}
+             {/* Spacer if thumbnail exists to push badge to right */}
+             {project.thumbnailUrl && <div className="flex-1"></div>}
 
             <span className={`px-2.5 py-0.5 text-[10px] font-bold rounded-full border ${getStatusColor(project.status)} uppercase tracking-wider`}>
               {getStatusText(project.status)}
             </span>
           </div>
 
-          <a href={project.url} className="block group/title">
+          <div className="block group/title">
               <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover/title:text-indigo-600 dark:group-hover/title:text-indigo-300 transition-colors">
                 {project.title}
               </h3>
-          </a>
+          </div>
           
           <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
             {project.description}
@@ -128,37 +132,54 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
               ))}
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-800/50">
-                {/* Main Action */}
-                <a 
-                    href={project.url}
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-medium hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors"
-                >
-                    <Globe className="w-4 h-4" />
-                    <span>访问</span>
-                </a>
-
-                {/* Secondary Actions */}
-                {project.articleUrl && (
+            {/* Action Buttons - Designed to match the provided screenshot */}
+            <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800/50">
+                
+                {/* Main Action: Visit Project */}
+                {project.url ? (
                     <a 
-                        href={project.articleUrl}
-                        title="阅读相关文章"
-                        className="p-2 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 dark:text-slate-400 dark:hover:text-indigo-400 dark:hover:bg-indigo-500/10 transition-all"
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()} // Stop propagation to prevent modal open
+                        className="flex items-center gap-2 px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-bold hover:bg-slate-800 dark:hover:bg-slate-200 transition-all shadow-sm hover:shadow-md"
                     >
-                        <BookOpen className="w-4 h-4" />
+                        <Globe className="w-4 h-4" />
+                        <span>访问</span>
                     </a>
+                ) : (
+                    // Placeholder if no URL
+                    <div className="px-2 py-2 text-xs text-slate-400 font-medium">暂无链接</div>
                 )}
 
-                {project.githubUrl && (
-                    <a 
-                        href={project.githubUrl}
-                        title="查看源代码"
-                        className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800 transition-all"
-                    >
-                        <Github className="w-4 h-4" />
-                    </a>
-                )}
+                {/* Secondary Actions: Article & Github */}
+                <div className="flex items-center gap-4">
+                    {project.articleUrl && (
+                        <a 
+                            href={project.articleUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()} // Stop propagation
+                            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors p-1"
+                            title="阅读文章"
+                        >
+                            <BookOpen className="w-5 h-5" />
+                        </a>
+                    )}
+                    {project.githubUrl && (
+                        <a 
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()} // Stop propagation
+                            className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1"
+                            title="查看源码"
+                        >
+                            <Github className="w-5 h-5" />
+                        </a>
+                    )}
+                </div>
+
             </div>
           </div>
         </div>

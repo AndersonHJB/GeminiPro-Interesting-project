@@ -6,8 +6,9 @@ import { Footer } from './components/Footer';
 import { SocialProfile } from './components/SocialProfile';
 import { ThoughtCarousel } from './components/ThoughtCarousel';
 import { NoticeBoard } from './components/NoticeBoard';
+import { ProjectModal } from './components/ProjectModal';
 import { PROJECTS } from './constants';
-import { ThemeMode } from './types';
+import { ThemeMode, Project } from './types';
 import { ChevronLeft, ChevronRight, ArrowUp, ArrowDown, Search } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -18,6 +19,9 @@ const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  
+  // Modal State
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   // Search Filter Logic
   const filteredProjects = useMemo(() => {
@@ -176,14 +180,17 @@ const App: React.FC = () => {
           {/* Notice Board */}
           <NoticeBoard />
 
-          {/* Old Search Bar removed from here */}
-
           <div id="project-grid" className="scroll-mt-32 min-h-[400px]">
                {filteredProjects.length > 0 ? (
                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
                    <AnimatePresence mode="popLayout">
                       {currentProjects.map((project, index) => (
-                        <ProjectCard key={project.id} project={project} index={index} />
+                        <ProjectCard 
+                            key={project.id} 
+                            project={project} 
+                            index={index} 
+                            onClick={setSelectedProject}
+                        />
                       ))}
                    </AnimatePresence>
                 </div>
@@ -262,6 +269,17 @@ const App: React.FC = () => {
         </main>
 
         <Footer />
+        
+        {/* Project Modal */}
+        <AnimatePresence>
+          {selectedProject && (
+            <ProjectModal 
+                key="project-modal"
+                project={selectedProject} 
+                onClose={() => setSelectedProject(null)} 
+            />
+          )}
+        </AnimatePresence>
 
         {/* Floating Navigation Controls */}
         <div className="fixed bottom-8 right-8 z-50 flex flex-col gap-3">

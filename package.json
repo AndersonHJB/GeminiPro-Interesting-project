@@ -12,7 +12,9 @@
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "lucide-react": "^0.556.0",
-    "framer-motion": "^12.23.25"
+    "framer-motion": "^12.23.25",
+    "marked": "12.0.0",
+    "@waline/client": "v3"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
