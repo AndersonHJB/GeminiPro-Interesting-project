@@ -5,6 +5,7 @@ import { ProjectCard } from './components/ProjectCard';
 import { Footer } from './components/Footer';
 import { SocialProfile } from './components/SocialProfile';
 import { ThoughtCarousel } from './components/ThoughtCarousel';
+import { NoticeBoard } from './components/NoticeBoard';
 import { PROJECTS } from './constants';
 import { ThemeMode } from './types';
 import { ChevronLeft, ChevronRight, ArrowUp, ArrowDown } from 'lucide-react';
@@ -149,6 +150,10 @@ const App: React.FC = () => {
         <Header theme={theme} toggleTheme={toggleTheme} />
         
         <main className="flex-grow container mx-auto px-6 pb-12">
+          
+          {/* Notice Board placed here */}
+          <NoticeBoard />
+
           <div id="project-grid" className="scroll-mt-32 min-h-[800px]">
                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
                  <AnimatePresence mode="popLayout">
