@@ -22,82 +22,84 @@ export const Header: React.FC<HeaderProps> = ({ theme, toggleTheme, searchQuery,
       </div>
 
       {/* Top Navigation Bar */}
-      <div className="absolute top-0 w-full px-4 sm:px-6 py-6 flex justify-between items-center z-50">
-        {/* Left: Logo */}
-        <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold tracking-tight shrink-0">
-          <BornForThisLogo className="w-9 h-9 sm:w-10 sm:h-10" />
-          <span className="hidden md:inline text-lg">BornForThis</span>
-        </div>
-        
-        {/* Right: Actions (Search + Theme) */}
-        <div className="flex items-center gap-3 sm:gap-4">
-            
-            {/* Search Bar - Enhanced */}
-            <div className="relative group">
-                {/* Search Icon - Left aligned, pointer-events-none so click passes to input */}
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none z-10">
-                    <Search className="h-4 w-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors duration-300" />
-                </div>
-                
-                <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="搜索项目..."
-                    className="
-                      block
-                      w-36 focus:w-56 sm:w-44 sm:focus:w-72
-                      transition-[width,background-color,shadow] duration-300 ease-out
-                      pl-10 pr-9 py-2.5
-                      rounded-full
-                      bg-white/60 dark:bg-slate-800/60
-                      hover:bg-white/80 dark:hover:bg-slate-800/80
-                      focus:bg-white dark:focus:bg-slate-800
-                      border border-slate-200 dark:border-slate-700/60
-                      focus:border-indigo-500/50
-                      text-sm font-medium
-                      text-slate-700 dark:text-slate-200
-                      placeholder-slate-400/80
-                      focus:outline-none
-                      focus:ring-4 focus:ring-indigo-500/10
-                      shadow-sm backdrop-blur-md
-                    "
-                    aria-label="搜索项目"
-                />
+      <div className="absolute top-0 w-full z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center">
+          {/* Left: Logo */}
+          <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold tracking-tight shrink-0">
+            <BornForThisLogo className="w-9 h-9 sm:w-10 sm:h-10" />
+            <span className="hidden md:inline text-lg">BornForThis</span>
+          </div>
+          
+          {/* Right: Actions (Search + Theme) */}
+          <div className="flex items-center gap-3 sm:gap-4">
+              
+              {/* Search Bar - Enhanced */}
+              <div className="relative group">
+                  {/* Search Icon - Left aligned, pointer-events-none so click passes to input */}
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none z-10">
+                      <Search className="h-4 w-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors duration-300" />
+                  </div>
+                  
+                  <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="搜索项目..."
+                      className="
+                        block
+                        w-36 focus:w-56 sm:w-44 sm:focus:w-72
+                        transition-[width,background-color,shadow] duration-300 ease-out
+                        pl-10 pr-9 py-2.5
+                        rounded-full
+                        bg-white/60 dark:bg-slate-800/60
+                        hover:bg-white/80 dark:hover:bg-slate-800/80
+                        focus:bg-white dark:focus:bg-slate-800
+                        border border-slate-200 dark:border-slate-700/60
+                        focus:border-indigo-500/50
+                        text-sm font-medium
+                        text-slate-700 dark:text-slate-200
+                        placeholder-slate-400/80
+                        focus:outline-none
+                        focus:ring-4 focus:ring-indigo-500/10
+                        shadow-sm backdrop-blur-md
+                      "
+                      aria-label="搜索项目"
+                  />
 
-                {/* Clear Button - Shows only when there is query */}
-                <div className={`absolute inset-y-0 right-0 flex items-center pr-2 transition-opacity duration-200 ${searchQuery ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                   <button
-                        onClick={() => setSearchQuery('')}
-                        className="p-1 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-slate-700/50 transition-colors"
-                        aria-label="清除搜索"
-                    >
-                        <X className="h-3.5 w-3.5" />
-                    </button>
-                </div>
-            </div>
-
-            {/* Separator (visible on desktop) */}
-            <div className="hidden sm:block w-px h-6 bg-slate-200 dark:bg-slate-700/50 mx-1"></div>
-
-            {/* Theme Toggle */}
-            <button 
-              onClick={toggleTheme}
-              className="p-2.5 rounded-full bg-white/60 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700/60 backdrop-blur-md shadow-sm hover:shadow active:scale-95 group/theme"
-              title={`当前模式: ${theme === 'system' ? '自动' : theme === 'dark' ? '深色' : '浅色'}`}
-              aria-label="切换主题"
-            >
-              <div className="relative w-5 h-5">
-                 {theme === 'light' && <Sun className="w-5 h-5 absolute inset-0 rotate-0 transition-transform duration-500" />}
-                 {theme === 'dark' && <Moon className="w-5 h-5 absolute inset-0 rotate-0 transition-transform duration-500" />}
-                 {theme === 'system' && <Monitor className="w-5 h-5 absolute inset-0 rotate-0 transition-transform duration-500" />}
+                  {/* Clear Button - Shows only when there is query */}
+                  <div className={`absolute inset-y-0 right-0 flex items-center pr-2 transition-opacity duration-200 ${searchQuery ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                    <button
+                          onClick={() => setSearchQuery('')}
+                          className="p-1 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-slate-700/50 transition-colors"
+                          aria-label="清除搜索"
+                      >
+                          <X className="h-3.5 w-3.5" />
+                      </button>
+                  </div>
               </div>
-            </button>
+
+              {/* Separator (visible on desktop) */}
+              <div className="hidden sm:block w-px h-6 bg-slate-200 dark:bg-slate-700/50 mx-1"></div>
+
+              {/* Theme Toggle */}
+              <button 
+                onClick={toggleTheme}
+                className="p-2.5 rounded-full bg-white/60 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700/60 backdrop-blur-md shadow-sm hover:shadow active:scale-95 group/theme"
+                title={`当前模式: ${theme === 'system' ? '自动' : theme === 'dark' ? '深色' : '浅色'}`}
+                aria-label="切换主题"
+              >
+                <div className="relative w-5 h-5">
+                  {theme === 'light' && <Sun className="w-5 h-5 absolute inset-0 rotate-0 transition-transform duration-500" />}
+                  {theme === 'dark' && <Moon className="w-5 h-5 absolute inset-0 rotate-0 transition-transform duration-500" />}
+                  {theme === 'system' && <Monitor className="w-5 h-5 absolute inset-0 rotate-0 transition-transform duration-500" />}
+                </div>
+              </button>
+          </div>
         </div>
       </div>
 
       {/* Hero Content */}
-      <div className="relative container mx-auto px-6 text-center z-10 pt-8 sm:pt-0">
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 pt-8 sm:pt-0">
         <motion.div 
            initial={{ opacity: 0, y: 20 }}
            animate={{ opacity: 1, y: 0 }}

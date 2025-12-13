@@ -175,7 +175,7 @@ const App: React.FC = () => {
             setSearchQuery={setSearchQuery}
         />
         
-        <main className="flex-grow container mx-auto px-6 pb-12">
+        <main className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
           
           {/* Notice Board */}
           <NoticeBoard />
