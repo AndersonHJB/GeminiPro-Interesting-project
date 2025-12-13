@@ -148,7 +148,7 @@ export const NoticeBoard: React.FC = () => {
   if (NOTICES.length === 0) return null;
 
   return (
-    <div className="w-full max-w-4xl mx-auto mb-8 z-20 relative">
+    <div className="w-full mb-8 z-20 relative">
       <div 
         className="relative flex items-center gap-3 bg-white/70 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/60 shadow-lg rounded-2xl py-3 px-4 sm:py-3 sm:px-5 overflow-hidden transition-all hover:shadow-xl hover:bg-white/80 dark:hover:bg-slate-900/70 group"
         onMouseEnter={() => setIsPaused(true)}
