@@ -4,18 +4,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  build: {
-    rollupOptions: {
-      // 告诉 Vite 这些包是外部依赖，不要打包它们
-      // 因为它们已经在 index.html 中通过 importmap (CDN) 引入了
-      external: ['marked', '@waline/client'],
-      output: {
-        // 在 UMD 构建模式下的全局变量名（可选，但在某些情况下有帮助）
-        globals: {
-          marked: 'marked',
-          '@waline/client': 'Waline'
-        }
-      }
-    }
-  }
+  // 移除 build.rollupOptions.external 配置
+  // 这样本地构建(vite build)时会自动将 node_modules 中的包打包进产物
+  // 而在线预览时，浏览器会优先使用 index.html 中的 importmap (CDN)
 });
