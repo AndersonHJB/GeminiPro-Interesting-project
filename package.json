@@ -1,27 +1,28 @@
+
 {
   "name": "bornforthis-project-hub",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
-    "lucide-react": "^0.556.0",
-    "framer-motion": "^12.23.25",
-    "marked": "12.0.0",
-    "@waline/client": "v3",
-    "vite": "^7.2.7",
-    "@vitejs/plugin-react": "^5.1.2"
+    "@vitejs/plugin-react": "^4.2.1",
+    "@waline/client": "^3.1.2",
+    "framer-motion": "^11.0.8",
+    "lucide-react": "^0.344.0",
+    "marked": "^12.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite": "^5.1.4"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
-    "@vitejs/plugin-react": "^5.0.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "@types/react": "^18.2.56",
+    "@types/react-dom": "^18.2.19",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.2.2"
   }
 }
