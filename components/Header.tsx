@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { Sparkles, Sun, Moon, Monitor, Search, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ThemeMode } from '../types';
@@ -13,6 +13,16 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ theme, toggleTheme, searchQuery, setSearchQuery }) => {
+  // Ref to control input focus/blur
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Handle Enter key to blur input (close keyboard/shrink width)
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      inputRef.current?.blur();
+    }
+  };
+
   return (
     <header className="py-20 sm:py-32 relative overflow-hidden">
       {/* Background decoration */}
@@ -41,9 +51,11 @@ export const Header: React.FC<HeaderProps> = ({ theme, toggleTheme, searchQuery,
                   </div>
                   
                   <input
+                      ref={inputRef}
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
+                      onKeyDown={handleKeyDown}
                       placeholder="搜索项目..."
                       className="
                         block
@@ -69,7 +81,10 @@ export const Header: React.FC<HeaderProps> = ({ theme, toggleTheme, searchQuery,
                   {/* Clear Button - Shows only when there is query */}
                   <div className={`absolute inset-y-0 right-0 flex items-center pr-2 transition-opacity duration-200 ${searchQuery ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                     <button
-                          onClick={() => setSearchQuery('')}
+                          onClick={() => {
+                            setSearchQuery('');
+                            inputRef.current?.focus();
+                          }}
                           className="p-1 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-slate-700/50 transition-colors"
                           aria-label="清除搜索"
                       >
