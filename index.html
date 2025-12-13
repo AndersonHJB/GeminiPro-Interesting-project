@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BornForThis|AI悦创创新实验室</title>
+    <link rel="icon" href="https://bornforthis.cn/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Waline CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              slate: {
+                850: '#151e2e',
+                950: '#020617', // Custom deep background
+              }
+            },
+            backgroundImage: {
+              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+            }
+          }
+        }
+      }
+    </script>
+    <script>
+      // Immediate theme check to prevent FOUC
+      try {
+        const storedTheme = localStorage.getItem('theme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        
+        if (storedTheme === 'dark' || (!storedTheme && systemTheme === 'dark')) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {}
+    </script>
+    <style>
+      body {
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      
+      /* Tech Dot Pattern */
+      .bg-dot-pattern {
+        background-image: radial-gradient(circle at 1px 1px, rgb(203 213 225) 1.5px, transparent 0);
+        background-size: 32px 32px;
+      }
+      .dark .bg-dot-pattern {
+        background-image: radial-gradient(circle at 1px 1px, rgb(30 41 59) 1.5px, transparent 0);
+      }
+
+      /* Subtle Grid for extra tech feel (optional use) */
+      .bg-grid-pattern {
+        background-size: 60px 60px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+      }
+      .dark .bg-grid-pattern {
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      }
+
+      /* Markdown Content Styles (Prose-like) */
+      .markdown-body {
+        color: inherit;
+        line-height: 1.75;
+      }
+      .markdown-body h1 { font-size: 1.75em; font-weight: 700; margin-bottom: 0.75em; margin-top: 1.5em; letter-spacing: -0.025em; }
+      .markdown-body h2 { font-size: 1.5em; font-weight: 600; margin-bottom: 0.75em; margin-top: 1.5em; letter-spacing: -0.025em; }
+      .markdown-body h3 { font-size: 1.25em; font-weight: 600; margin-bottom: 0.5em; margin-top: 1.25em; }
+      .markdown-body p { margin-bottom: 1.25em; }
+      .markdown-body ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1.25em; }
+      .markdown-body ol { list-style-type: decimal; padding-left: 1.5em; margin-bottom: 1.25em; }
+      .markdown-body li { margin-bottom: 0.25em; }
+      .markdown-body blockquote { 
+        border-left: 4px solid #6366f1; 
+        padding-left: 1em; 
+        font-style: italic; 
+        opacity: 0.8; 
+        margin-bottom: 1.5em; 
+        background-color: rgba(99, 102, 241, 0.05);
+        padding: 1em;
+        border-radius: 0 0.5rem 0.5rem 0;
+      }
+      .markdown-body code { 
+        background-color: rgba(99, 102, 241, 0.1); 
+        padding: 0.2em 0.4em; 
+        border-radius: 4px; 
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; 
+        font-size: 0.875em; 
+        color: #4f46e5;
+      }
+      .dark .markdown-body code { color: #818cf8; background-color: rgba(129, 140, 248, 0.15); }
+      .markdown-body pre { 
+        background-color: #1e293b; 
+        color: #e2e8f0; 
+        padding: 1.25em; 
+        border-radius: 0.75rem; 
+        overflow-x: auto; 
+        margin-bottom: 1.5em; 
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+      .markdown-body pre code { 
+        background-color: transparent; 
+        padding: 0; 
+        color: inherit; 
+        font-size: 0.9em;
+      }
+      .markdown-body a { 
+        color: #6366f1; 
+        text-decoration: underline; 
+        text-underline-offset: 4px; 
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .markdown-body a:hover { color: #4f46e5; }
+      .dark .markdown-body a { color: #818cf8; }
+      .dark .markdown-body a:hover { color: #a5b4fc; }
+      .markdown-body img { border-radius: 0.75rem; max-width: 100%; margin: 2em 0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+      .markdown-body hr { border-color: rgba(148, 163, 184, 0.2); margin: 3em 0; }
+      
+      /* Waline Customization */
+      :root {
+        --waline-theme-color: #6366f1 !important;
+        --waline-active-color: #4f46e5 !important;
+      }
+      .dark {
+        --waline-bgcolor: #0f172a !important;
+        --waline-bgcolor-light: #1e293b !important;
+        --waline-border-color: #334155 !important;
+        --waline-text-color: #94a3b8 !important;
+        --waline-color: #cbd5e1 !important;
+      }
+      /* Hide copyright in Waline */
+      .waline-copyright { display: none !important; }
+    </style>
+
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.25",
+    "marked": "https://esm.sh/marked@12.0.0",
+    "@waline/client": "https://esm.sh/@waline/client@v3",
+    "vite": "https://esm.sh/vite@^7.2.7",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-DuMhLhAl.js"></script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
