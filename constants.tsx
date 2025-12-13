@@ -68,7 +68,7 @@ export const PROJECTS: Project[] = [
 
 快叫上你的朋友来一场对决吧！
     `,
-    url: 'https://gemini.bornforthis.cn/ReadyGoDuel/',
+    url: 'https://ai.bornforthis.cn/ReadyGoDuel/',
     githubUrl: 'https://github.com/AndersonHJB/ReadyGoDuel',
     tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Web Audio API', 'Game Development'],
     iconName: 'Sparkles',
