@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Header } from './components/Header';
 import { ProjectCard } from './components/ProjectCard';
 import { Footer } from './components/Footer';
@@ -8,8 +8,8 @@ import { ThoughtCarousel } from './components/ThoughtCarousel';
 import { NoticeBoard } from './components/NoticeBoard';
 import { PROJECTS } from './constants';
 import { ThemeMode } from './types';
-import { ChevronLeft, ChevronRight, ArrowUp, ArrowDown } from 'lucide-react';
-import { AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, ArrowUp, ArrowDown, Search } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -17,10 +17,27 @@ const App: React.FC = () => {
   const [theme, setTheme] = useState<ThemeMode>('system');
   const [currentPage, setCurrentPage] = useState(1);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // Pagination Logic
-  const totalPages = Math.ceil(PROJECTS.length / ITEMS_PER_PAGE);
-  const currentProjects = PROJECTS.slice(
+  // Search Filter Logic
+  const filteredProjects = useMemo(() => {
+    if (!searchQuery.trim()) return PROJECTS;
+    const lowerQuery = searchQuery.toLowerCase().trim();
+    return PROJECTS.filter(project => 
+      project.title.toLowerCase().includes(lowerQuery) ||
+      project.description.toLowerCase().includes(lowerQuery) ||
+      project.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
+    );
+  }, [searchQuery]);
+
+  // Reset to page 1 when search changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
+
+  // Pagination Logic (based on filtered results)
+  const totalPages = Math.ceil(filteredProjects.length / ITEMS_PER_PAGE);
+  const currentProjects = filteredProjects.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
@@ -147,21 +164,50 @@ const App: React.FC = () => {
 
       {/* Content wrapper with z-index to sit above background */}
       <div className="relative z-10 flex flex-col min-h-screen">
-        <Header theme={theme} toggleTheme={toggleTheme} />
+        <Header 
+            theme={theme} 
+            toggleTheme={toggleTheme} 
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+        />
         
         <main className="flex-grow container mx-auto px-6 pb-12">
           
-          {/* Notice Board placed here */}
+          {/* Notice Board */}
           <NoticeBoard />
 
-          <div id="project-grid" className="scroll-mt-32 min-h-[800px]">
-               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
-                 <AnimatePresence mode="popLayout">
-                    {currentProjects.map((project, index) => (
-                      <ProjectCard key={project.id} project={project} index={index} />
-                    ))}
-                 </AnimatePresence>
-              </div>
+          {/* Old Search Bar removed from here */}
+
+          <div id="project-grid" className="scroll-mt-32 min-h-[400px]">
+               {filteredProjects.length > 0 ? (
+                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
+                   <AnimatePresence mode="popLayout">
+                      {currentProjects.map((project, index) => (
+                        <ProjectCard key={project.id} project={project} index={index} />
+                      ))}
+                   </AnimatePresence>
+                </div>
+               ) : (
+                 <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex flex-col items-center justify-center py-20 text-center"
+                 >
+                    <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800/50 rounded-full flex items-center justify-center mb-4">
+                        <Search className="w-8 h-8 text-slate-300 dark:text-slate-600" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">没有找到相关项目</h3>
+                    <p className="text-slate-500 dark:text-slate-400 max-w-md">
+                        尝试更换关键词，或者看看其他的项目吧。
+                    </p>
+                    <button 
+                        onClick={() => setSearchQuery('')}
+                        className="mt-6 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:border-indigo-500 hover:text-indigo-500 transition-colors shadow-sm"
+                    >
+                        清除搜索
+                    </button>
+                 </motion.div>
+               )}
           </div>
 
           {/* Pagination Controls */}
@@ -206,7 +252,7 @@ const App: React.FC = () => {
           {/* Divider */}
           <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-800 to-transparent mb-12 opacity-50"></div>
 
-          {/* Replaced ManifestoSection with ThoughtCarousel */}
+          {/* ThoughtCarousel */}
           <ThoughtCarousel />
 
           {/* Divider below thoughts to separate from social */}
