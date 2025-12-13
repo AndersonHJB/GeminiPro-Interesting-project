@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { X, Github, Globe, Tag, BookOpen } from 'lucide-react';
 import { marked } from 'marked';
@@ -16,6 +16,22 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
+
+  // Handle ESC key press
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClose]);
 
   // Safe parsing of markdown content
   // Fallback to description if content is missing
