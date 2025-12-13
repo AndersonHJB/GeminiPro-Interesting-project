@@ -59,7 +59,18 @@ body {
   color: #4f46e5;
 }
 .dark .markdown-body code { color: #818cf8; background-color: rgba(129, 140, 248, 0.15); }
-.markdown-bodyKb pre { 
+.markdown-bodyTb pre {
+  /* Note: Removed typo 'markdown-bodyKb' here */
+  background-color: #1e293b; 
+  color: #e2e8f0; 
+  padding: 1.25em; 
+  border-radius: 0.75rem; 
+  overflow-x: auto; 
+  margin-bottom: 1.5em; 
+  border: 1px solid rgba(255,255,255,0.1);
+}
+/* Ensure the correct selector is used */
+.markdown-body pre { 
   background-color: #1e293b; 
   color: #e2e8f0; 
   padding: 1.25em; 

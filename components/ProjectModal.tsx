@@ -37,9 +37,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   // Fallback to description if content is missing
   const rawContent = project.content || project.description || '暂无详细介绍';
   
-  // Use marked.parse() from the imported object
-  // This is the standard way for recent marked versions in ESM
-  const htmlContent = marked.parse(rawContent) as string;
+  // Configure marked to handle line breaks similar to GitHub flavor
+  const htmlContent = marked.parse(rawContent, { breaks: true }) as string;
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
@@ -60,7 +59,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ duration: 0.3, type: "spring", stiffness: 300, damping: 30 }}
         onClick={handleContentClick}
-        className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-slate-900 rounded-3xl shadow-2xl overflow-hidden flex flex-col border border-slate-200 dark:border-slate-800"
+        className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-300 rounded-3xl shadow-2xl overflow-hidden flex flex-col border border-slate-200 dark:border-slate-800"
       >
         {/* Header (Sticky) */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-10 sticky top-0">
