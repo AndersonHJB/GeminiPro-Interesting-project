@@ -57,6 +57,7 @@ export const VisitCounter: React.FC = () => {
         title="总访问量"
     >
       <Eye className={`w-3.5 h-3.5 group-hover:text-indigo-500 transition-colors ${loading ? 'animate-pulse' : ''}`} />
+      <span className="hidden sm:inline">本站总访问量:</span>
       <span className={`tabular-nums tracking-wide ${loading ? 'animate-pulse' : ''}`}>
         {count !== null ? count.toLocaleString() : '-'}
       </span>
