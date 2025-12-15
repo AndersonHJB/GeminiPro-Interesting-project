@@ -55,6 +55,8 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClick }) => {
+  const hasSecondaryLinks = !!(project.articleUrl || project.githubUrl);
+
   return (
     <motion.div
       layout
@@ -142,7 +144,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClic
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()} // Stop propagation to prevent modal open
-                        className="flex items-center gap-2 px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-bold hover:bg-slate-800 dark:hover:bg-slate-200 transition-all shadow-sm hover:shadow-md"
+                        className={`flex items-center gap-2 px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-bold hover:bg-slate-800 dark:hover:bg-slate-200 transition-all shadow-sm hover:shadow-md ${!hasSecondaryLinks ? 'w-full justify-center' : ''}`}
                     >
                         <Globe className="w-4 h-4" />
                         <span>访问</span>
@@ -153,32 +155,34 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClic
                 )}
 
                 {/* Secondary Actions: Article & Github */}
-                <div className="flex items-center gap-4">
-                    {project.articleUrl && (
-                        <a 
-                            href={project.articleUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()} // Stop propagation
-                            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors p-1"
-                            title="阅读文章"
-                        >
-                            <BookOpen className="w-5 h-5" />
-                        </a>
-                    )}
-                    {project.githubUrl && (
-                        <a 
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()} // Stop propagation
-                            className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1"
-                            title="查看源码"
-                        >
-                            <Github className="w-5 h-5" />
-                        </a>
-                    )}
-                </div>
+                {hasSecondaryLinks && (
+                  <div className="flex items-center gap-4 ml-4">
+                      {project.articleUrl && (
+                          <a 
+                              href={project.articleUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()} // Stop propagation
+                              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors p-1"
+                              title="阅读文章"
+                          >
+                              <BookOpen className="w-5 h-5" />
+                          </a>
+                      )}
+                      {project.githubUrl && (
+                          <a 
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()} // Stop propagation
+                              className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1"
+                              title="查看源码"
+                          >
+                              <Github className="w-5 h-5" />
+                          </a>
+                      )}
+                  </div>
+                )}
 
             </div>
           </div>
