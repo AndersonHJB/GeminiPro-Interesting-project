@@ -126,7 +126,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'LittleSteps-BigMoments',
-    title: '视觉分析实验室',
+    title: '棠棠周岁礼物🎁「相册」',
     description: '上传图片即可获得深度分析，利用最新的视觉识别模型识别物体与场景。',
     githubUrl: 'https://github.com/AndersonHJB/LittleSteps-BigMoments',
     url: '#',
