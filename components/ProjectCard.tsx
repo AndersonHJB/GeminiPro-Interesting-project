@@ -134,7 +134,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClic
               ))}
             </div>
 
-            {/* Action Buttons - Designed to match the provided screenshot */}
+            {/* Action Buttons */}
             <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800/50">
                 
                 {/* Main Action: Visit Project */}
@@ -144,14 +144,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClic
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()} // Stop propagation to prevent modal open
-                        className={`flex items-center gap-2 px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-bold hover:bg-slate-800 dark:hover:bg-slate-200 transition-all shadow-sm hover:shadow-md ${!hasSecondaryLinks ? 'w-full justify-center' : ''}`}
+                        className="flex-1 flex items-center justify-center gap-2 px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-bold hover:bg-slate-800 dark:hover:bg-slate-200 transition-all shadow-sm hover:shadow-md"
                     >
                         <Globe className="w-4 h-4" />
                         <span>访问</span>
                     </a>
                 ) : (
                     // Placeholder if no URL
-                    <div className="px-2 py-2 text-xs text-slate-400 font-medium">暂无链接</div>
+                    <div className="flex-1 px-2 py-2 text-xs text-slate-400 font-medium">暂无链接</div>
                 )}
 
                 {/* Secondary Actions: Article & Github */}
