@@ -127,12 +127,69 @@ export const PROJECTS: Project[] = [
   {
     id: 'LittleSteps-BigMoments',
     title: '棠棠周岁礼物🎁「相册」',
+    thumbnailUrl: 'http://ai.bornforthis.cn/images/P03-FirstSight.png',
     description: '上传图片即可获得深度分析，利用最新的视觉识别模型识别物体与场景。',
-    githubUrl: 'https://github.com/AndersonHJB/LittleSteps-BigMoments',
-    url: '#',
+    githubUrl: 'https://github.com/AndersonHJB/FirstSight',
+    url: 'https://ai.bornforthis.cn/FirstSight/',
     articleUrl: 'https://bornforthis.cn',
     tags: ['Computer Vision', 'Analysis'],
     iconName: 'Eye',
-    status: 'concept',
+    status: 'beta',
+    // status: 'concept',
+    featured: true,
+    content: `<div align="center">
+时光 · 家书
+
+Timeless Family Album
+
+<p align="center">
+<b>岁月 · 静好 | 把时间写成诗</b>
+</p>
+</div>
+
+💌 写在前面
+
+在这个快节奏的数字时代，我们每天都在拍摄成千上万张照片，但它们往往沉睡在冰冷的硬盘或云端，渐渐被遗忘。
+
+「时光 · 家书」 不仅仅是一个相册，它更像是一本放在床头、触手可及的纸质影集。我们希望通过温暖的纸张质感、手写的字迹和极简的叙事，帮你找回翻阅老照片时的那份感动。
+
+这里没有复杂的功能，只有最纯粹的——爱与回忆。
+
+🌿 设计理念
+
+"我们无法留住时间，但我们可以留住时间里的爱与感动。"
+
+纸的温度：界面采用米色纸张纹理，仿佛泛黄的信纸，承载着厚重的时光感。
+
+见字如面：大量运用手写字体，就像亲人的一纸家书，传递着指尖的温度。
+
+极简叙事：摒弃繁杂的干扰，让每一张照片、每一段文字都成为主角，静静讲述它的故事。
+
+✨ 珍藏的篇章
+
+🏠 家庭影像 (Family Album)
+
+记录那些看似平淡，回过头看却闪闪发光的日常。
+
+无论是周末午后的野餐，除夕夜热气腾腾的饺子，还是雨天窝在沙发上的一本书。这里存放着家庭的共同记忆，每一个瞬间都配有详细的文字记录，让照片不再是静止的图像，而是一段鲜活的故事。
+
+👣 成长足迹 (Growth Timeline)
+
+所有的惊喜，都藏在长大的每一个瞬间里。
+
+专为孩子设计的时间轴记录。从第一次睁眼看世界，到第一次蹒跚学步，再到第一次背上书包。每一个里程碑都被精心标注了日期和月龄，用时间轴串联起生命最初的奇迹。
+
+📖 阅读体验
+
+沉浸式灯箱：点击照片，世界安静下来，只剩下你和那段回忆。
+
+胶片感排版：如同拍立得般的照片展示，随意散落在桌面上，充满生活气息。
+
+流动的交互：温柔的过渡动画，如同微风翻动书页，带来舒适的浏览体验。
+
+<div align="center">
+<p>愿这份「家书」，能成为你留给未来最珍贵的礼物。</p>
+<p>© 2025 时光 · 家书</p>
+</div>`
   },
 ];
