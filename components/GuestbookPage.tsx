@@ -38,8 +38,8 @@ export const GuestbookPage: React.FC = () => {
         </div>
 
         {/* Waline Comments - Visual Updated for better blending */}
-        {/* Changed: bg-white -> bg-white/40, removed shadow-2xl, used subtle ring instead of border */}
-        <div className="bg-white/40 dark:bg-slate-900/50 rounded-3xl p-4 sm:p-10 ring-1 ring-slate-900/5 dark:ring-slate-800 shadow-sm backdrop-blur-xl">
+        {/* Removed ring classes for borderless look */}
+        <div className="bg-white/40 dark:bg-slate-900/50 rounded-3xl p-4 sm:p-10 shadow-sm backdrop-blur-xl">
              <WalineSection path="/guestbook" />
         </div>
 
