@@ -3,7 +3,8 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./*.{js,ts,jsx,tsx}",           // 扫描根目录下的 App.tsx, index.tsx 等
+    "./components/**/*.{js,ts,jsx,tsx}", // 扫描 components 目录下的组件
   ],
   darkMode: 'class',
   theme: {
