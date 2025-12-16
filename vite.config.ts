@@ -20,4 +20,35 @@ export default defineConfig({
       }
     }
   ],
+  build: {
+    // 适当调高警告阈值到 1000KB，避免因单个库本身较大（如完整版 framer-motion）而频繁报警
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        // 手动分包策略
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            // 将 Waline 评论系统拆分为单独的包
+            if (id.includes('@waline/client')) {
+              return 'waline';
+            }
+            // 将 Framer Motion 动画库拆分为单独的包
+            if (id.includes('framer-motion')) {
+              return 'framer-motion';
+            }
+            // 将 React 核心库拆分为单独的包
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react/jsx-runtime')) {
+              return 'react-vendor';
+            }
+            // 将图标库拆分
+            if (id.includes('lucide-react')) {
+              return 'lucide';
+            }
+            // 其他所有第三方库归为 vendor
+            return 'vendor';
+          }
+        }
+      }
+    }
+  }
 });
