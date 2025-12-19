@@ -1,63 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>时光 · 家书</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="https://bornforthis.cn/favicon.ico">
+    <!-- Waline Style -->
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
     <!-- Added Zhi Mang Xing for handwriting feel -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              serif: ['"Noto Serif SC"', 'serif'],
-              sans: ['"Noto Sans SC"', 'sans-serif'],
-              hand: ['"Zhi Mang Xing"', 'cursive'], // New handwriting font
-            },
-            colors: {
-              paper: '#f9f7f2', // Warmer paper color
-              'paper-dark': '#f0efe9',
-              ink: '#3a3a3a', // Softer black
-              'warm-gray': '#e7e5e4',
-              'accent-brown': '#8c7b75', // Earthy tone
-              'accent-gold': '#d4af37',
-            },
-            boxShadow: {
-              'polaroid': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0,0,0,0.02)',
-              'polaroid-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02), 0 0 0 1px rgba(0,0,0,0.02)',
-            },
-            animation: {
-              'fade-in': 'fadeIn 1s ease-out forwards',
-              'slide-up': 'slideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
-              'float': 'float 6s ease-in-out infinite',
-            },
-            keyframes: {
-              fadeIn: {
-                '0%': { opacity: '0' },
-                '100%': { opacity: '1' },
-              },
-              slideUp: {
-                '0%': { opacity: '0', transform: 'translateY(30px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-10px)' },
-              }
-            }
-          }
-        }
-      }
-    </script>
+    
     <style>
       body {
         background-color: #f9f7f2;
         color: #3a3a3a;
-        /* Subtle paper texture overlay could be added here */
       }
       .scrollbar-hide::-webkit-scrollbar {
           display: none;
@@ -66,6 +26,22 @@
           -ms-overflow-style: none;
           scrollbar-width: none;
       }
+      /* Waline Custom Styling for Message Board */
+      :root {
+        --waline-theme-color: #8c7b75;
+        --waline-active-color: #3a3a3a;
+        --waline-bg-color: transparent;
+        --waline-bg-color-light: #fdfbf7;
+        --waline-border-color: #e7e5e4;
+      }
+      .wl-panel {
+        border-radius: 2px !important;
+        border: 1px solid #e7e5e4 !important;
+        background: #fff !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.02) !important;
+      }
+      .wl-header { border-bottom: 1px dashed #e7e5e4 !important; }
+      .wl-input { font-family: "Noto Serif SC", serif !important; }
     </style>
 
   <script type="importmap">
@@ -74,11 +50,22 @@
     "react": "https://esm.sh/react@^19.2.3",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.561.0"
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "react-dom": "https://esm.sh/react-dom@^19.2.3",
+    "vite-plugin-imagemin": "https://esm.sh/vite-plugin-imagemin@^0.6.1",
+    "vite-plugin-image-optimizer": "https://esm.sh/vite-plugin-image-optimizer@^2.0.3",
+    "react-markdown": "https://esm.sh/react-markdown@9?bundle",
+    "@waline/client": "https://esm.sh/@waline/client@^3.8.0"
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-vjP6KNGO.js"></script>
+  <script type="module" crossorigin src="./assets/index-Dq7e30lV.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/vendor-NjmhqTsS.js">
+  <link rel="modulepreload" crossorigin href="./assets/react-vendor-BNfLKH_q.js">
+  <link rel="modulepreload" crossorigin href="./assets/waline-yIBR7l5y.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-DqShaL9v.css">
 </head>
   <body>
     <div id="root"></div>
