@@ -244,6 +244,8 @@ Timeless Family Album
 - 基础版本：[https://ai.bornforthis.cn/MemorySpark/](https://ai.bornforthis.cn/MemorySpark/)
 - Pro 版本：[https://ai.bornforthis.cn/MemorySpark/index-pro.html](https://ai.bornforthis.cn/MemorySpark/index-pro.html)
 - Pro Max 版本：[https://ai.bornforthis.cn/MemorySpark/index-ProMax.html](https://ai.bornforthis.cn/MemorySpark/index-ProMax.html)
+- PPro Max 版本：[https://ai.bornforthis.cn/MemorySpark/index-PProMax.html](https://ai.bornforthis.cn/MemorySpark/index-PProMax.html)｜添加灯带
+- 棠棠宝贝专属：[https://ai.bornforthis.cn/MemorySpark/MemorySpark.html](https://ai.bornforthis.cn/MemorySpark/MemorySpark.html)
 `
   },
 ];
