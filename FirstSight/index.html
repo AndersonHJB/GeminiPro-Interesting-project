@@ -26,22 +26,69 @@
           -ms-overflow-style: none;
           scrollbar-width: none;
       }
-      /* Waline Custom Styling for Message Board */
+      
+      /* ==========================================
+         Waline 深度定制：时光家书主题
+         ========================================== */
       :root {
-        --waline-theme-color: #8c7b75;
-        --waline-active-color: #3a3a3a;
-        --waline-bg-color: transparent;
-        --waline-bg-color-light: #fdfbf7;
-        --waline-border-color: #e7e5e4;
+        --waline-theme-color: #8c7b75 !important;
+        --waline-active-color: #3a3a3a !important;
+        --waline-bg-color: transparent !important;
+        --waline-bg-color-light: #fdfbf7 !important;
+        --waline-border-color: #e7e5e4 !important;
+        --waline-text-color: #3a3a3a !important;
+        --waline-info-bg-color: #f0efe9 !important;
+        --waline-border: 1px solid var(--waline-border-color);
       }
+
+      .wl-content { font-family: "Noto Serif SC", serif !important; }
       .wl-panel {
-        border-radius: 2px !important;
+        border-radius: 4px !important;
         border: 1px solid #e7e5e4 !important;
         background: #fff !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.02) !important;
       }
       .wl-header { border-bottom: 1px dashed #e7e5e4 !important; }
-      .wl-input { font-family: "Noto Serif SC", serif !important; }
+      .wl-input { 
+        font-family: "Noto Serif SC", serif !important; 
+        background: linear-gradient(to bottom, transparent 31px, #f0efe9 31px) !important;
+        background-size: 100% 32px !important;
+        line-height: 32px !important;
+      }
+      .wl-btn {
+        border-radius: 2px !important;
+        font-family: "Noto Serif SC", serif !important;
+        font-weight: 400 !important;
+        letter-spacing: 0.1em !important;
+        text-transform: uppercase !important;
+        font-size: 0.8rem !important;
+      }
+      .wl-btn.primary {
+        background: #3a3a3a !important;
+        border-color: #3a3a3a !important;
+      }
+      .wl-btn.primary:hover {
+        background: #8c7b75 !important;
+        border-color: #8c7b75 !important;
+      }
+      .wl-card {
+        border-bottom: 1px dashed #e7e5e4 !important;
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+      }
+      .wl-nick { 
+        font-family: "Zhi Mang Xing", cursive !important; 
+        font-size: 1.4rem !important;
+        color: #8c7b75 !important;
+      }
+      .wl-time { font-family: "Noto Sans SC", sans-serif !important; opacity: 0.6; }
+      .wl-badge {
+        background: #f0efe9 !important;
+        color: #8c7b75 !important;
+        border-radius: 2px !important;
+        font-size: 0.6rem !important;
+      }
+      .wl-power { display: none !important; }
     </style>
 
   <script type="importmap">
@@ -57,15 +104,16 @@
     "vite-plugin-imagemin": "https://esm.sh/vite-plugin-imagemin@^0.6.1",
     "vite-plugin-image-optimizer": "https://esm.sh/vite-plugin-image-optimizer@^2.0.3",
     "react-markdown": "https://esm.sh/react-markdown@9?bundle",
-    "@waline/client": "https://esm.sh/@waline/client@^3.8.0"
+    "@waline/client": "https://esm.sh/@waline/client@^3.8.0",
+    "html-to-image": "https://esm.sh/html-to-image@^1.11.11"
   }
 }
 </script>
-  <script type="module" crossorigin src="./assets/index-Dq7e30lV.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/vendor-NjmhqTsS.js">
-  <link rel="modulepreload" crossorigin href="./assets/react-vendor-BNfLKH_q.js">
-  <link rel="modulepreload" crossorigin href="./assets/waline-yIBR7l5y.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-DqShaL9v.css">
+  <script type="module" crossorigin src="./assets/index-jkzJ9iqB.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/vendor-6Kcdu6yk.js">
+  <link rel="modulepreload" crossorigin href="./assets/react-vendor-CjZCGl2f.js">
+  <link rel="modulepreload" crossorigin href="./assets/waline-BtYTrJwc.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-Bc-8QL_m.css">
 </head>
   <body>
     <div id="root"></div>
