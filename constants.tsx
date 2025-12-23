@@ -128,7 +128,7 @@ export const PROJECTS: Project[] = [
     id: 'LittleSteps-BigMoments',
     title: '棠棠周岁礼物🎁「相册」',
     thumbnailUrl: 'http://ai.bornforthis.cn/images/P03-FirstSight.png',
-    description: '上传图片即可获得深度分析，利用最新的视觉识别模型识别物体与场景。',
+    description: '相册',
     githubUrl: 'https://github.com/AndersonHJB/FirstSight',
     url: 'https://ai.bornforthis.cn/FirstSight/',
     articleUrl: 'https://bornforthis.cn',
@@ -191,5 +191,21 @@ Timeless Family Album
 <p>愿这份「家书」，能成为你留给未来最珍贵的礼物。</p>
 <p>© 2025 时光 · 家书</p>
 </div>`
+  },
+  {
+    id: 'MemorySpark',
+    title: '圣诞树🎄',
+    thumbnailUrl: 'https://ai.bornforthis.cn/images/P04-MemorySpark.png',
+    description: '基于 WebGL 与 AI 手势识别的 3D 粒子时光胶囊。挥挥手，让回忆化作漫天星辰。',
+    // githubUrl: 'https://github.com/AndersonHJB/FirstSight',
+    url: 'https://ai.bornforthis.cn/MemorySpark/index-ProMax.html',
+    articleUrl: 'https://bornforthis.cn',
+    tags: ['Three.js', 'MediaPipe', 'Creative Coding', 'Interactive'],
+    iconName: 'Gift',
+    status: 'live',
+    // status: 'beta',
+    // status: 'concept',
+    featured: true,
+    content: ``
   },
 ];
