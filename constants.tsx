@@ -248,6 +248,9 @@ Timeless Family Album
 - PM 版本：[https://ai.bornforthis.cn/MemorySpark/index-PM.html](https://ai.bornforthis.cn/MemorySpark/index-PM.html)｜移动端版体验版本
 - 棠棠宝贝专属：[https://ai.bornforthis.cn/MemorySpark/MemorySpark.html](https://ai.bornforthis.cn/MemorySpark/MemorySpark.html)
 - 发行版本：[https://ai.bornforthis.cn/MemorySpark/FinalVersion.html](https://ai.bornforthis.cn/MemorySpark/FinalVersion.html)｜持续 debug 中！｜日期：2025-12-24 19:56:17
+  - 更新日期：2025-12-24 20:43:06，说明：内置默认图片，便于快速便捷体验！（Prompt：添加一个按钮功能，有些用户没有照片想要直接体验，可以选择激活默认的照片来进行交互体验。（其它现有功能不要影响））
+  - 更新日期：2025-12-24 22:02:45，说明：礼物就应该是可以定制的，所以实现：页面标题设计填写，祝福语。支持缓存 7 天！
+
 
 # About
 
