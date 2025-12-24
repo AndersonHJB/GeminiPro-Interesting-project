@@ -198,7 +198,7 @@ Timeless Family Album
     thumbnailUrl: 'https://ai.bornforthis.cn/images/P04-MemorySpark.png',
     description: '挥挥手，让回忆化作漫天星辰。一个只属于你的、由光点与照片编织的梦境森林。',
     // githubUrl: 'https://github.com/AndersonHJB/FirstSight',
-    url: 'https://ai.bornforthis.cn/MemorySpark/index-ProMax.html',
+    url: 'https://ai.bornforthis.cn/MemorySpark/index-PProMax.html',
     articleUrl: 'https://bornforthis.cn/column/Python-Programming-Course/P10-Share/Interesting-project/06-Christmas-tree.html',
     tags: ['Digital Art', 'Christmas', 'Memories', 'Magic'],
     iconName: 'Gift',
