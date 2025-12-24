@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>MemorySpark｜ai.bornforthis.cn AI实验室</title>
+    <!-- 修改：本地图标 -->
     <link rel="icon" href="https://bornforthis.cn/favicon.ico">
     <style>
         body {
@@ -456,22 +457,25 @@
         }
 
     </style>
-    <!-- MediaPipe Hands Global Script (Fix for Module Error) -->
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/hands.js" crossorigin="anonymous"></script>
+    
+    <!-- 修改：指向本地 MediaPipe 手部追踪库 -->
+    <script src="./js/hands.js" crossorigin="anonymous"></script>
 
-    <!-- Import Maps for Three.js and Addons -->
+    <!-- 修改：Import Map 指向本地 Three.js -->
     <script type="importmap">
         {
             "imports": {
-                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+                "three": "./js/three.module.js",
+                "three/addons/": "./js/" 
             }
         }
     </script>
+    <!-- 注意：代码中并没有用到 addons (如 OrbitControls)，如果将来用到，需要将 js/addons/ 指向正确文件夹 -->
+
 </head>
 <body>
 
-    <!-- Audio Element (Added crossorigin for recording) -->
+    <!-- Audio Element -->
     <audio id="bg-music" loop crossorigin="anonymous"></audio>
 
     <!-- Loading Screen -->
@@ -590,7 +594,7 @@
             musicCacheKey: 'xmas_music_pref_v3', // 更新版本号以适应新逻辑
             textCacheKey: 'xmas_custom_text_v1', // 新增：文本缓存 Key
             
-            // 内置歌单
+            // 修改：内置歌单 (恢复为 CDN 在线路径)
             playlist: [
                 { name: "Last Christmas", url: "https://cdn.bornforthis.cn/mp3/LastChristmas(Single%20Version).m4a" },
                 { name: "Jingle Bell Rock", url: "https://cdn.bornforthis.cn/mp3/JingleBellRock.m4a" },
@@ -602,7 +606,7 @@
                 { name: "Christmas Time in My Town", url: "https://cdn.bornforthis.cn/mp3/ChristmasTimeinMyHomeTown.mp3" },
             ],
 
-            // 默认照片列表
+            // 默认照片列表 (维持相对路径，确保 images_compressed 文件夹存在)
             defaultPhotos: [
                 "./images_compressed/DSC02094.JPG", // 图片 1
                 "./images_compressed/DSC02182.JPG", // 图片 2
@@ -869,9 +873,10 @@
         async function setupMediaPipe() {
             const video = document.getElementById('video-feed');
 
-            // Access Global Hands Class
+            // 修改：使用本地文件加载逻辑
+            // locateFile 函数告诉 MediaPipe 去哪里找 .wasm 和 .data 文件
             const hands = new window.Hands({locateFile: (file) => {
-                return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+                return `./js/${file}`; // 所有依赖都在 ./js/ 文件夹
             }});
 
             hands.setOptions({
@@ -1659,13 +1664,14 @@
                 console.log("Loading default photos...");
                 
                 if (total === 0) {
-                     hideLoading();
-                     return;
+                      hideLoading();
+                      return;
                 }
 
                 defaults.forEach(url => {
                     const img = new Image();
-                    img.crossOrigin = "Anonymous"; 
+                    // 本地文件不需要 crossOrigin (file protocol might warn, but local server handles it)
+                    // img.crossOrigin = "Anonymous"; 
                     img.src = url;
                     
                     const onFinish = () => {

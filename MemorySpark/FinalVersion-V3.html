@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>MemorySpark｜ai.bornforthis.cn AI实验室</title>
+    <title>MemorySpark PProMax｜ai.bornforthis.cn AI实验室</title>
     <link rel="icon" href="https://bornforthis.cn/favicon.ico">
     <style>
         body {
@@ -506,7 +506,7 @@
     <div id="ui-layer">
         <div class="header">
             <!-- 给标题和祝福语加ID以便JS操作 -->
-            <h1 id="main-title">圣诞节🎄快乐！｜Bornforthis AI实验室</h1>
+            <h1 id="main-title">圣诞节🎄快乐！PPro Max｜Bornforthis AI实验室</h1>
             <div id="blessing-display" class="blessing-text"></div>
             <p class="subtitle">https://ai.bornforthis.cn/</p>
         </div>
@@ -1636,90 +1636,29 @@
         
         // 新增：加载默认照片功能
         window.loadDefaultPhotos = function() {
-            // Show Loading
-            const loadingScreen = document.getElementById('loading');
-            const loadingText = document.getElementById('loading-text');
+            // 1. Clear existing
+            window.clearCachedPhotos();
+
+            // 2. Load
+            const defaults = CONFIG.defaultPhotos;
+            let loadedCount = 0;
+
+            console.log("Loading default photos...");
             
-            loadingText.innerText = "正在加载默认照片...";
-            loadingScreen.style.display = 'flex';
-            // Force reflow
-            void loadingScreen.offsetWidth; 
-            loadingScreen.style.opacity = '1';
-
-            // Use setTimeout to allow UI to render the loading screen before processing starts
-            setTimeout(() => {
-                // 1. Clear existing
-                window.clearCachedPhotos();
-
-                // 2. Load
-                const defaults = CONFIG.defaultPhotos;
-                let loadedCount = 0;
-                const total = defaults.length;
-
-                console.log("Loading default photos...");
-                
-                if (total === 0) {
-                     hideLoading();
-                     return;
-                }
-
-                defaults.forEach(url => {
-                    const img = new Image();
-                    img.crossOrigin = "Anonymous"; 
-                    img.src = url;
-                    
-                    const onFinish = () => {
-                        loadedCount++;
-                        if (loadedCount >= total) {
-                            hideLoading();
-                        }
-                    };
-
-                    img.onload = () => {
-                        // 🟢 FIX: Resize image to prevent mobile crash (Memory Limit)
-                        const MAX_SIZE = 512; // Lower limit for mobile stability
-                        let width = img.width;
-                        let height = img.height;
-
-                        if (width > height) {
-                            if (width > MAX_SIZE) {
-                                height *= MAX_SIZE / width;
-                                width = MAX_SIZE;
-                            }
-                        } else {
-                            if (height > MAX_SIZE) {
-                                width *= MAX_SIZE / height;
-                                height = MAX_SIZE;
-                            }
-                        }
-
-                        const canvas = document.createElement('canvas');
-                        canvas.width = width;
-                        canvas.height = height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-
-                        // Use canvas as texture source instead of original heavy image
-                        createPhotoMesh(canvas); 
-                        onFinish();
-                    };
-                    img.onerror = () => {
-                        console.warn("Failed to load default photo:", url);
-                        onFinish();
-                    };
-                });
-            }, 100);
-
-            function hideLoading() {
-                setTimeout(() => {
-                    loadingScreen.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingScreen.style.display = 'none';
-                        // Restore original text just in case
-                        loadingText.innerText = "正在初始化视觉引擎与AI模型...";
-                    }, 500);
-                }, 800);
-            }
+            defaults.forEach(url => {
+                const img = new Image();
+                img.crossOrigin = "Anonymous"; 
+                img.src = url;
+                img.onload = () => {
+                    createPhotoMesh(img);
+                    loadedCount++;
+                };
+                img.onerror = () => {
+                    console.warn("Failed to load default photo:", url);
+                };
+            });
+            
+            alert("正在加载默认照片体验...");
         };
 
         // 将文件读取并压缩为 Base64
