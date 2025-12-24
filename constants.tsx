@@ -247,7 +247,7 @@ Timeless Family Album
 - PPro Max 版本：[https://ai.bornforthis.cn/MemorySpark/index-PProMax.html](https://ai.bornforthis.cn/MemorySpark/index-PProMax.html)｜添加灯带
 - PM 版本：[https://ai.bornforthis.cn/MemorySpark/index-PM.html](https://ai.bornforthis.cn/MemorySpark/index-PM.html)｜移动端版体验版本
 - 棠棠宝贝专属：[https://ai.bornforthis.cn/MemorySpark/MemorySpark.html](https://ai.bornforthis.cn/MemorySpark/MemorySpark.html)
-- 发行版本：[https://ai.bornforthis.cn/MemorySpark/FinalVersion.html](https://ai.bornforthis.cn/MemorySpark/FinalVersion.html)｜持续 debug 中！
+- 发行版本：[https://ai.bornforthis.cn/MemorySpark/FinalVersion.html](https://ai.bornforthis.cn/MemorySpark/FinalVersion.html)｜持续 debug 中！｜日期：2025-12-24 19:56:17
 
 # About
 
