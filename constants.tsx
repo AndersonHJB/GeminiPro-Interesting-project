@@ -251,6 +251,10 @@ Timeless Family Album
 # About
 
 有什么、有想法都可以在下方评论，期待我的改进！
+
+# ChangeLog
+
+- 日期：2025 年 12 月 24 日，粉丝 vastpower 提出安卓手机无法使用，经过测试修复已经正常使用；
 `
   },
 ];
