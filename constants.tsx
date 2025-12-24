@@ -206,7 +206,14 @@ Timeless Family Album
     // status: 'beta',
     // status: 'concept',
     featured: true,
-    content: `# 🎄 由光与回忆编织的圣诞树
+    content: `# ChangeLog
+
+- 日期：2025 年 12 月 24 日，粉丝 vastpower 提出安卓手机无法使用，经过测试修复已经正常使用；
+- 更新日期：2025-12-24 20:43:06，说明：内置默认图片，便于快速便捷体验！（Prompt：添加一个按钮功能，有些用户没有照片想要直接体验，可以选择激活默认的照片来进行交互体验。（其它现有功能不要影响））
+- 更新日期：2025-12-24 22:02:45，说明：礼物就应该是可以定制的，所以实现：页面标题设计填写，祝福语。支持缓存 7 天！
+- 更新日期：2025-12-24 22:15:31，说明：默认图片导入需要确认，导致手机端重复刷新，修复！
+    
+# 🎄 由光与回忆编织的圣诞树
 
 这个冬天，不想送你千篇一律的礼物。于是，我种下了一颗特别的树。
 
@@ -248,17 +255,14 @@ Timeless Family Album
 - PM 版本：[https://ai.bornforthis.cn/MemorySpark/index-PM.html](https://ai.bornforthis.cn/MemorySpark/index-PM.html)｜移动端版体验版本
 - 棠棠宝贝专属：[https://ai.bornforthis.cn/MemorySpark/MemorySpark.html](https://ai.bornforthis.cn/MemorySpark/MemorySpark.html)
 - 发行版本：[https://ai.bornforthis.cn/MemorySpark/FinalVersion.html](https://ai.bornforthis.cn/MemorySpark/FinalVersion.html)｜持续 debug 中！｜日期：2025-12-24 19:56:17
-  - 更新日期：2025-12-24 20:43:06，说明：内置默认图片，便于快速便捷体验！（Prompt：添加一个按钮功能，有些用户没有照片想要直接体验，可以选择激活默认的照片来进行交互体验。（其它现有功能不要影响））
-  - 更新日期：2025-12-24 22:02:45，说明：礼物就应该是可以定制的，所以实现：页面标题设计填写，祝福语。支持缓存 7 天！
+
 
 
 # About
 
 有什么、有想法都可以在下方评论，期待我的改进！
 
-# ChangeLog
 
-- 日期：2025 年 12 月 24 日，粉丝 vastpower 提出安卓手机无法使用，经过测试修复已经正常使用；
 `
   },
 ];
