@@ -213,7 +213,8 @@ Timeless Family Album
 - 更新日期：2025-12-24 22:02:45，说明：礼物就应该是可以定制的，所以实现：页面标题设计填写，祝福语。支持缓存 7 天！
 - 更新日期：2025-12-24 22:15:31，说明：默认图片导入需要确认，导致手机端重复刷新，修复！
 - 更新日期：2025-12-24 22:45:51，说明：安卓手机加载性能解决。本地化资源，但是貌似和原本一样，被安卓本身性能限制，体验测试链接：[https://ai.bornforthis.cn/MemorySpark/test.html](https://ai.bornforthis.cn/MemorySpark/test.html)
-- 更新日期：2025-12-24 23:17:25，说明降低灵敏度的测试版：[https://ai.bornforthis.cn/MemorySpark/test2.html](https://ai.bornforthis.cn/MemorySpark/test2.html)｜有机会转成正式版，但是需要大家测试！
+- 更新日期：2025-12-24 23:17:25，说明：降低灵敏度的测试版：[https://ai.bornforthis.cn/MemorySpark/test2.html](https://ai.bornforthis.cn/MemorySpark/test2.html)｜有机会转成正式版，但是需要大家测试！
+- 更新日期：2025-12-25 08:45:26，说明：添加网站统计代码；（试运行）
 - 未来：改进抓取图片弹出的路径、速度，增加体验感。
 
 
