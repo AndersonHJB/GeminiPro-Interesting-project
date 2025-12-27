@@ -260,6 +260,9 @@ Timeless Family Album
 - PM 版本：[https://ai.bornforthis.cn/MemorySpark/index-PM.html](https://ai.bornforthis.cn/MemorySpark/index-PM.html)｜移动端版体验版本
 - 棠棠宝贝专属：[https://ai.bornforthis.cn/MemorySpark/MemorySpark.html](https://ai.bornforthis.cn/MemorySpark/MemorySpark.html)
 - 发行版本：[https://ai.bornforthis.cn/MemorySpark/FinalVersion.html](https://ai.bornforthis.cn/MemorySpark/FinalVersion.html)｜持续 debug 中！｜日期：2025-12-24 19:56:17
+- 测试版本：[https://ai.bornforthis.cn/MemorySpark/test-love3.html](https://ai.bornforthis.cn/MemorySpark/test-love3.html)｜内置爱心，需要改进样式（未发现其它 bug，明年再改吧！）
+
+> 目前已知的缺点：右手识别精度需要提升，左手识别较准。改进测试版爱心效果，使之更精美。其它 bug 等网友反馈～
 
 
 
