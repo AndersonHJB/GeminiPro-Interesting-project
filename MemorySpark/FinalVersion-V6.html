@@ -76,19 +76,6 @@
             font-size: 12px;
             font-family: monospace;
         }
-        
-        /* 统计数据显示样式 */
-        .pv-display {
-            display: inline-block;
-            margin-top: 4px;
-            font-family: monospace;
-            font-size: 12px;
-            color: #FFD700;
-            background: rgba(0,0,0,0.3);
-            padding: 2px 6px;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
 
         /* Status & Instructions & Buttons Container */
         .status-panel {
@@ -481,17 +468,6 @@
             }
         }
     </script>
-    
-    <!-- 🟢 统计代码接入区域 -->
-    <script
-      src="https://counter.bornforthis.cn/counter.js"
-      data-domain="ai.bornforthis.cn"
-      data-project="auto"
-      data-target="#bft-page-pv"
-      data-prefix="访问量: "
-    ></script>
-    <!-- 统计代码结束 -->
-
 </head>
 <body>
 
@@ -533,10 +509,6 @@
             <h1 id="main-title">圣诞节🎄快乐！｜Bornforthis AI实验室</h1>
             <div id="blessing-display" class="blessing-text"></div>
             <p class="subtitle">https://ai.bornforthis.cn/</p>
-            
-            <!-- 🟢 统计数据显示区域 -->
-            <!-- counter.js 会自动寻找 id="bft-page-pv" 的元素并填入内容 -->
-            <span id="bft-page-pv" class="pv-display">正在获取数据...</span>
         </div>
 
         <!-- 移动端菜单切换按钮 -->
@@ -1687,8 +1659,8 @@
                 console.log("Loading default photos...");
                 
                 if (total === 0) {
-                      hideLoading();
-                      return;
+                     hideLoading();
+                     return;
                 }
 
                 defaults.forEach(url => {
@@ -1904,11 +1876,11 @@
                 
                 // If entering focus mode, pick a random photo to bring forward if any exist
                 if (currentState === STATE.FOCUS && photoMeshes.length > 0) {
-                      // Reset all photos first
-                      photoMeshes.forEach(p => p.focusOffset = null);
-                      // Pick one
-                      const luckyPhoto = photoMeshes[Math.floor(Math.random() * photoMeshes.length)];
-                      luckyPhoto.focusOffset = true;
+                     // Reset all photos first
+                     photoMeshes.forEach(p => p.focusOffset = null);
+                     // Pick one
+                     const luckyPhoto = photoMeshes[Math.floor(Math.random() * photoMeshes.length)];
+                     luckyPhoto.focusOffset = true;
                 }
             }
 

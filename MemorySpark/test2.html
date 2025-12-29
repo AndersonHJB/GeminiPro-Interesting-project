@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>MemorySpark｜ai.bornforthis.cn AI实验室</title>
+    <title>MemorySpark test2｜ai.bornforthis.cn AI实验室</title>
     <link rel="icon" href="https://bornforthis.cn/favicon.ico">
     <style>
         body {
@@ -75,19 +75,6 @@
             color: #aaa;
             font-size: 12px;
             font-family: monospace;
-        }
-        
-        /* 统计数据显示样式 */
-        .pv-display {
-            display: inline-block;
-            margin-top: 4px;
-            font-family: monospace;
-            font-size: 12px;
-            color: #FFD700;
-            background: rgba(0,0,0,0.3);
-            padding: 2px 6px;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
         /* Status & Instructions & Buttons Container */
@@ -481,17 +468,6 @@
             }
         }
     </script>
-    
-    <!-- 🟢 统计代码接入区域 -->
-    <script
-      src="https://counter.bornforthis.cn/counter.js"
-      data-domain="ai.bornforthis.cn"
-      data-project="auto"
-      data-target="#bft-page-pv"
-      data-prefix="访问量: "
-    ></script>
-    <!-- 统计代码结束 -->
-
 </head>
 <body>
 
@@ -530,13 +506,9 @@
     <div id="ui-layer">
         <div class="header">
             <!-- 给标题和祝福语加ID以便JS操作 -->
-            <h1 id="main-title">圣诞节🎄快乐！｜Bornforthis AI实验室</h1>
+            <h1 id="main-title">圣诞节🎄快乐！降低灵敏度，测试版｜Bornforthis AI实验室</h1>
             <div id="blessing-display" class="blessing-text"></div>
             <p class="subtitle">https://ai.bornforthis.cn/</p>
-            
-            <!-- 🟢 统计数据显示区域 -->
-            <!-- counter.js 会自动寻找 id="bft-page-pv" 的元素并填入内容 -->
-            <span id="bft-page-pv" class="pv-display">正在获取数据...</span>
         </div>
 
         <!-- 移动端菜单切换按钮 -->
@@ -682,7 +654,8 @@
         let targetState = STATE.TREE;
         
         // Hand Data
-        let handPos = { x: 0, y: 0 }; // Normalized -1 to 1
+        let rawHandPos = { x: 0, y: 0 }; // 原始输入数据
+        let handPos = { x: 0, y: 0 };    // 平滑处理后的数据
         let isHandDetected = false;
 
         // Music State
@@ -946,8 +919,10 @@
                 // Wrist is 0, Middle Finger MCP is 9
                 const cx = landmarks[9].x;
                 const cy = landmarks[9].y;
-                handPos.x = (cx - 0.5) * 2; // -1 to 1
-                handPos.y = (cy - 0.5) * 2;
+                
+                // 更新原始目标位置 (rawHandPos)
+                rawHandPos.x = (cx - 0.5) * 2; // -1 to 1
+                rawHandPos.y = (cy - 0.5) * 2;
 
                 // 2. Gesture Recognition
                 const state = detectGesture(landmarks);
@@ -1687,8 +1662,8 @@
                 console.log("Loading default photos...");
                 
                 if (total === 0) {
-                      hideLoading();
-                      return;
+                     hideLoading();
+                     return;
                 }
 
                 defaults.forEach(url => {
@@ -1898,17 +1873,25 @@
             requestAnimationFrame(animate);
             time += 0.01;
 
+            // 0. Hand Position Smoothing (新增：手势平滑处理)
+            // 使用线性插值 (Lerp) 让 handPos 缓慢接近 rawHandPos，避免抖动和过快响应
+            if (isHandDetected) {
+                const smoothFactor = 0.08; // 越小越平滑/迟缓，越大越灵敏 (0.08 是个不错的平衡点)
+                handPos.x += (rawHandPos.x - handPos.x) * smoothFactor;
+                handPos.y += (rawHandPos.y - handPos.y) * smoothFactor;
+            }
+
             // 1. Smooth State Transition
             if (currentState !== targetState) {
                 currentState = targetState;
                 
                 // If entering focus mode, pick a random photo to bring forward if any exist
                 if (currentState === STATE.FOCUS && photoMeshes.length > 0) {
-                      // Reset all photos first
-                      photoMeshes.forEach(p => p.focusOffset = null);
-                      // Pick one
-                      const luckyPhoto = photoMeshes[Math.floor(Math.random() * photoMeshes.length)];
-                      luckyPhoto.focusOffset = true;
+                     // Reset all photos first
+                     photoMeshes.forEach(p => p.focusOffset = null);
+                     // Pick one
+                     const luckyPhoto = photoMeshes[Math.floor(Math.random() * photoMeshes.length)];
+                     luckyPhoto.focusOffset = true;
                 }
             }
 
@@ -1919,10 +1902,18 @@
 
             // Hand Influence
             if (currentState === STATE.EXPLODE && isHandDetected) {
-                const angle = handPos.x * Math.PI; 
+                // 降低灵敏度：减小乘数
+                // 旧值: handPos.x * Math.PI (约 3.14，即全屏滑动旋转180度)
+                // 新值: handPos.x * 1.2 (全屏滑动旋转约70度，更稳)
+                const angle = handPos.x * 1.2; 
+                
                 camX = Math.sin(angle) * 60;
                 camZ = Math.cos(angle) * 60;
-                camY = handPos.y * 30;
+                
+                // 垂直移动灵敏度也相应降低
+                // 旧值: handPos.y * 30
+                // 新值: handPos.y * 20
+                camY = handPos.y * 20;
             } else if (currentState === STATE.FOCUS) {
                 camX *= 0.3;
                 camZ *= 0.3;
