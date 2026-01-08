@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <title>2026 新年快乐</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #050505; /* 深沉的夜空黑 */
+            font-family: "Microsoft YaHei", "Heiti SC", sans-serif;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            touch-action: none; /* 禁止触摸时的默认滚动缩放行为 */
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        body:hover #controls, body:active #controls {
+            opacity: 1;
+        }
+        .btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 18px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 14px;
+            backdrop-filter: blur(5px);
+            user-select: none;
+            transition: all 0.3s ease;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            white-space: nowrap;
+        }
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        #hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255, 255, 255, 0.9);
+            pointer-events: none;
+            font-size: 16px;
+            letter-spacing: 2px;
+            animation: fadeOut 3.5s forwards;
+            animation-delay: 1.5s;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 20;
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+        
+        /* 最后展示的图片样式 */
+        #finalImgWrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+            transition: opacity 1.5s ease, transform 1.5s ease;
+            pointer-events: none; /* 让点击穿透到 Canvas */
+            z-index: 5;
+            width: 80%;
+            max-width: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #finalImgWrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        /* 激活状态 */
+        #finalImgWrapper.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 600px) {
+            #controls {
+                bottom: 40px; /* 避开全面屏手势条 */
+            }
+            .btn {
+                padding: 10px 20px; /* 更大的点击区域 */
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<!-- 最后的图片容器 -->
+<div id="finalImgWrapper">
+    <img src="https://ai.bornforthis.cn/HappyNewYear/loveyou/img/ai.png" alt="Happy New Year">
+</div>
+
+<div id="hint">点击任意处 开启盛大烟花音效</div>
+<div id="controls">
+    <button class="btn" id="restartBtn">↻ 重新播放</button>
+    <button class="btn" id="soundBtn">🔊 音效开</button>
+</div>
+
+<script>
+    /**
+     * 2026 New Year Fireworks & Particle Text Animation
+     * Updates: Added final image display logic & Fixed mobile width overflow.
+     */
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const finalImgWrapper = document.getElementById('finalImgWrapper');
+    
+    let width, height;
+    let particles = [];
+    let fireworks = [];
+    
+    // Audio Resources
+    const AUDIO_URLS = {
+        launch: 'https://ai.bornforthis.cn/HappyNewYear/mp3/shotfire.mp3',
+        boom: 'https://ai.bornforthis.cn/HappyNewYear/mp3/boom.mp3'
+    };
+    
+    // Audio State
+    let isSoundEnabled = true;
+    const soundBtn = document.getElementById('soundBtn');
+    const hint = document.getElementById('hint');
+    
+    // Audio Throttling
+    const AUDIO_LIMITS = {
+        lastLaunch: 0,
+        launchInterval: 50, 
+        lastBoom: 0,
+        boomInterval: 30    
+    };
+
+    // Configuration
+    const CONFIG = {
+        textList: [
+            "送给我的好朋友",
+            "郑淼枫",
+            "新年快乐！",
+            "再见 2025",
+            "3",
+            "2",
+            "1",
+            "2026",
+            "新年快乐",
+            "一岁一礼",
+            "一寸欢喜",
+            "愿新年胜旧年",
+            "欢愉且胜意",
+            "万事皆可期",
+            "__IMAGE__" // Special marker for the image
+        ],
+        times: [
+            2500, 2500, 2500, // Intro
+            3000, 1000, 1000, 1000, 3500, 2800, 2800, 2800, 2800, 2800, 
+            3000, // "万事皆可期"
+            6000  // Image display time
+        ], 
+        particleSize: 1.6, 
+        gap: 3, 
+        particleColor: 'rgba(255, 255, 255, 0.95)',
+        particleSpeed: 0.12, 
+        fireworkChance: 0.05, 
+        font: 'bold {fontSize}px "Microsoft YaHei", sans-serif'
+    };
+
+    let currentIndex = 0;
+    let lastTime = 0;
+    let textTimer = 0;
+
+    // --- Audio Helper ---
+
+    function playSound(type) {
+        if (!isSoundEnabled) return;
+        
+        const now = Date.now();
+        if (type === 'launch') {
+            if (now - AUDIO_LIMITS.lastLaunch < AUDIO_LIMITS.launchInterval) return;
+            AUDIO_LIMITS.lastLaunch = now;
+        } else if (type === 'boom') {
+            if (now - AUDIO_LIMITS.lastBoom < AUDIO_LIMITS.boomInterval) return;
+            AUDIO_LIMITS.lastBoom = now;
+        }
+        
+        const url = type === 'launch' ? AUDIO_URLS.launch : AUDIO_URLS.boom;
+        const audio = new Audio(url);
+        
+        if (type === 'launch') {
+            audio.volume = 0.2 + Math.random() * 0.1; 
+            audio.playbackRate = 1.2 + Math.random() * 0.4; 
+        } else {
+            audio.volume = 0.4 + Math.random() * 0.2; 
+        }
+
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {});
+        }
+    }
+
+    function toggleSound() {
+        isSoundEnabled = !isSoundEnabled;
+        soundBtn.innerText = isSoundEnabled ? "🔊 音效开" : "🔇 音效关";
+    }
+
+    // --- Setup ---
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        
+        if (width < 600) {
+            CONFIG.particleSize = 1.4;
+            CONFIG.gap = 2; 
+        } else {
+            CONFIG.particleSize = 1.8;
+            CONFIG.gap = 3; 
+        }
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // --- Classes ---
+
+    class Particle {
+        constructor(x, y) {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.tx = x;
+            this.ty = y;
+            this.active = true;
+            this.alpha = 1;
+        }
+
+        update() {
+            if (!this.active) {
+                this.alpha -= 0.02;
+                // Disperse randomly when inactive
+                this.x += (Math.random() - 0.5) * 2;
+                this.y += (Math.random() - 0.5) * 2;
+                return;
+            }
+
+            this.x += (this.tx - this.x) * CONFIG.particleSpeed;
+            this.y += (this.ty - this.y) * CONFIG.particleSpeed;
+            
+            this.x += (Math.random() - 0.5) * 0.5;
+            this.y += (Math.random() - 0.5) * 0.5;
+        }
+
+        draw() {
+            if (this.alpha <= 0) return;
+            ctx.fillStyle = CONFIG.particleColor;
+            ctx.globalAlpha = this.alpha * 0.9; 
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, CONFIG.particleSize, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        }
+    }
+
+    class Firework {
+        constructor() {
+            this.x = Math.random() * width;
+            this.y = height;
+            this.tx = Math.random() * width;
+            this.ty = Math.random() * (height * 0.6); 
+            
+            const duration = 80; 
+            this.vx = (this.tx - this.x) / duration;
+            this.vy = (this.ty - this.y) / duration;
+            
+            this.age = 0;
+            this.maxAge = duration; 
+            this.exploded = false;
+            this.sparks = [];
+            this.hue = Math.random() * 360;
+            this.brightness = Math.random() * 20 + 50; 
+
+            playSound('launch');
+        }
+
+        update() {
+            if (!this.exploded) {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.age++;
+                this.vy += 0.02;
+                if (this.age >= this.maxAge) this.explode();
+            } else {
+                for (let i = this.sparks.length - 1; i >= 0; i--) {
+                    this.sparks[i].update();
+                    if (this.sparks[i].alpha <= 0) this.sparks.splice(i, 1);
+                }
+            }
+        }
+
+        explode() {
+            this.exploded = true;
+            playSound('boom');
+            const count = 100 + Math.random() * 80; 
+            for (let i = 0; i < count; i++) {
+                this.sparks.push(new Spark(this.x, this.y, this.hue, this.brightness));
+            }
+        }
+
+        draw() {
+            if (!this.exploded) {
+                ctx.fillStyle = `hsl(${this.hue}, 100%, 70%)`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = `rgba(255, 255, 255, 0.3)`;
+                ctx.fillRect(this.x - 1, this.y, 2, 10);
+            } else {
+                this.sparks.forEach(s => s.draw());
+            }
+        }
+
+        isDead() {
+            return this.exploded && this.sparks.length === 0;
+        }
+    }
+
+    class Spark {
+        constructor(x, y, hue, brightness) {
+            this.x = x;
+            this.y = y;
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 6 + 2; 
+            
+            this.vx = Math.cos(angle) * speed;
+            this.vy = Math.sin(angle) * speed;
+            this.friction = 0.96; 
+            this.gravity = 0.05;  
+            this.hue = hue + (Math.random() - 0.5) * 40; 
+            this.brightness = brightness;
+            this.alpha = 1;
+            this.decay = Math.random() * 0.015 + 0.005; 
+        }
+
+        update() {
+            this.vx *= this.friction;
+            this.vy *= this.friction;
+            this.vy += this.gravity;
+            this.x += this.vx;
+            this.y += this.vy;
+            this.alpha -= this.decay;
+        }
+
+        draw() {
+            ctx.fillStyle = `hsla(${this.hue}, 100%, ${this.brightness}%, ${this.alpha})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, 1.8, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    // --- Text & Image Processing ---
+
+    function createParticleText(text) {
+        if (!width || !height || width <= 0 || height <= 0) return [];
+
+        const offCanvas = document.createElement('canvas');
+        const offCtx = offCanvas.getContext('2d');
+        offCanvas.width = width;
+        offCanvas.height = height;
+
+        // --- NEW ADAPTIVE FONT SIZE LOGIC ---
+        // Calculate max possible font size based on screen width and character count.
+        // We leave about 10% padding (width * 0.9).
+        // Max font size is capped to avoid overly large text on desktop (220px) 
+        // or exceeding 1/3.5 of screen height.
+        const maxFontBase = Math.min(height / 3.5, 220); 
+        const fontSizeBasedOnWidth = (width * 0.9) / Math.max(text.length, 3); // Assume at least 3 chars to prevent huge single letters
+        
+        const fontSize = Math.min(fontSizeBasedOnWidth, maxFontBase);
+
+        offCtx.font = CONFIG.font.replace('{fontSize}', fontSize);
+        offCtx.fillStyle = '#ffffff';
+        offCtx.textAlign = 'center';
+        offCtx.textBaseline = 'middle';
+        offCtx.shadowBlur = 10;
+        offCtx.shadowColor = 'white';
+        offCtx.fillText(text, width / 2, height / 2);
+
+        const imageData = offCtx.getImageData(0, 0, width, height).data;
+        const gap = CONFIG.gap; 
+        const newTargets = [];
+
+        for (let y = 0; y < height; y += gap) {
+            for (let x = 0; x < width; x += gap) {
+                const index = (y * width + x) * 4;
+                if (imageData[index + 3] > 128) {
+                    newTargets.push({ x, y });
+                }
+            }
+        }
+        return newTargets;
+    }
+
+    function switchText(index) {
+        const text = CONFIG.textList[index];
+        
+        // Handle Image Case
+        if (text === "__IMAGE__") {
+            // Show Image
+            finalImgWrapper.classList.add('active');
+            
+            // Disperse particles smoothly or keep them as background starfield
+            // By not setting new targets and setting 'active' to false for excess,
+            // we can make them float.
+            // Let's make all particles inactive so they fade out/float away
+            particles.forEach(p => {
+                p.active = false;
+                // Optional: give them a random velocity to disperse
+                p.vx = (Math.random() - 0.5) * 2;
+                p.vy = (Math.random() - 0.5) * 2;
+            });
+            return;
+        } else {
+            // Hide Image if it was shown
+            finalImgWrapper.classList.remove('active');
+        }
+
+        const targets = createParticleText(text);
+        if (!targets) return;
+
+        const numExisting = particles.length;
+        const numNeeded = targets.length;
+
+        for (let i = 0; i < numNeeded; i++) {
+            if (i < numExisting) {
+                particles[i].tx = targets[i].x;
+                particles[i].ty = targets[i].y;
+                particles[i].active = true;
+                particles[i].alpha = 1;
+            } else {
+                particles.push(new Particle(targets[i].x, targets[i].y));
+            }
+        }
+
+        for (let i = numNeeded; i < numExisting; i++) {
+            particles[i].active = false;
+        }
+    }
+
+    // --- Main Loop ---
+
+    function animate(timestamp) {
+        if (!lastTime) lastTime = timestamp;
+        const deltaTime = timestamp - lastTime;
+        lastTime = timestamp;
+
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+        ctx.fillRect(0, 0, width, height);
+
+        if (currentIndex < CONFIG.textList.length) {
+            textTimer += deltaTime;
+            if (textTimer >= CONFIG.times[currentIndex]) {
+                textTimer = 0;
+                currentIndex++;
+                if (currentIndex < CONFIG.textList.length) {
+                    switchText(currentIndex);
+                } else {
+                    currentIndex = 7; // Loop back to "2026"
+                    switchText(currentIndex);
+                }
+            }
+        }
+
+        // Fireworks logic
+        let chance = CONFIG.fireworkChance;
+        const currentText = CONFIG.textList[currentIndex];
+        
+        if (currentText === "2026" || currentText === "新年快乐") {
+            chance = 0.15; 
+        } else if (["3", "2", "1"].includes(currentText)) {
+            chance = 0.05; 
+        } else if (currentText === "__IMAGE__") {
+            chance = 0.08; // Keep some fireworks during image
+        }
+        
+        if (Math.random() < chance) {
+            fireworks.push(new Firework());
+        }
+
+        for (let i = fireworks.length - 1; i >= 0; i--) {
+            fireworks[i].update();
+            fireworks[i].draw();
+            if (fireworks[i].isDead()) fireworks.splice(i, 1);
+        }
+
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    // --- Initialization ---
+
+    function start() {
+        resize();
+        currentIndex = 0;
+        textTimer = 0;
+        particles = [];
+        fireworks = [];
+        switchText(currentIndex);
+        requestAnimationFrame(animate);
+    }
+    
+    function handleInteraction() {
+        if (!isSoundEnabled) isSoundEnabled = true;
+        if (hint) hint.style.display = 'none';
+        document.body.removeEventListener('click', handleInteraction);
+        document.body.removeEventListener('touchstart', handleInteraction);
+    }
+
+    document.getElementById('restartBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        start();
+        handleInteraction();
+    });
+    
+    soundBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleSound();
+        handleInteraction();
+    });
+
+    document.body.addEventListener('click', handleInteraction);
+    document.body.addEventListener('touchstart', handleInteraction);
+
+    start();
+
+</script>
+</body>
+</html>
