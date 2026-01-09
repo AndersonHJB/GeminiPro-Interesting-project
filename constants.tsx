@@ -273,4 +273,102 @@ Timeless Family Album
 
 `
   },
+  {
+    id: 'GeminiARGarden',
+    title: 'Gemini AR Garden 🌸',
+    thumbnailUrl: 'https://ai.bornforthis.cn/images/P05-GeminiARGarden.png',
+    description: '指尖滑过空气，仿佛唤醒了沉睡的星尘。用手势播种，用微笑灌溉，体验 Gemini AI 赋能的增强现实花园。',
+    // githubUrl: 'https://github.com/AndersonHJB/Gemini-ARGarden',
+    url: 'https://ai.bornforthis.cn/ARGarden/',
+    // articleUrl: 'https://bornforthis.cn/projects/gemini-ar-garden.html',
+    tags: ['AR', 'Gemini', 'Interactive Art', 'Mediapipe', 'React'],
+    iconName: 'Sprout',
+    status: 'live',
+    // status: 'beta',
+    featured: true,
+    content: `# ChangeLog
+
+- 更新日期：2025-01-09 14:20:00，说明：项目正式上线！集成 Google Gemini 1.5 Flash 模型，实现“花园感悟”诗意生成功能。
+- 更新日期：2025-01-08 10:15:30，说明：优化 MediaPipe 视觉模型加载策略，现在支持 iOS/Android 双端流畅体验（建议使用 Safari 或 Chrome）。
+- 更新日期：2025-01-07 22:45:12，说明：新增四种“环境基因” (Biomes) —— 日落、海洋、森林、薰衣草，以及多种花卉品种的随机生成算法。
+- 更新日期：2025-01-05 16:30:00，说明：完成核心 AR 交互开发：
+    - 🤏 **捏合 (Pinch)**：手势识别精度优化，现在可以精准地在指尖生成种子。
+    - 😲 **张嘴 (Mouth Open)**：增加面部捕捉，张嘴微笑即可加速花朵生长。
+    - ✊ **握拳 (Fist)**：重置功能的防误触优化，握拳 2 秒触发“轮回重生”。
+- 未来计划：增加更多花卉种类，支持多人 AR 协同种植。
+
+# 🌸 Gemini AR Garden | 指尖上的灵动花园
+
+> "指尖滑过空气，仿佛唤醒了沉睡的星尘。"
+
+欢迎来到 **Gemini AR Garden**。这不仅仅是一个程序，更是一个融合了现实与幻想的数字温室。在这里，你不需要泥土与铲子，只需通过简单的手势和表情，就能在空气中播种、灌溉，让绚丽的花朵在你的现实空间中绽放。
+
+---
+
+## 🌿 体验自然魔法 (如何互动)
+
+在这个增强现实 (AR) 的世界里，你的身体就是大自然的指挥棒。无需鼠标或键盘，使用直觉即可与自然对话。
+
+### 1. 播种希望 (Sow) 🤏
+**动作**：拇指与食指轻轻**捏合**。
+**效果**：一颗闪耀着金色光芒的种子将从你的指尖落下。看着它落入虚拟的土壤，那是生命的开始。
+
+### 2. 唤醒生机 (Grow) 😲
+**动作**：对着镜头**张开嘴巴**（或大笑）。
+**效果**：你的气息仿佛化作了春风与雨露。花朵会感知到你的能量，加速向上生长，并绚烂地绽放开来。
+
+### 3. 轮回重生 (Rebirth) ✊
+**动作**：单手**握紧拳头**并保持片刻。
+**效果**：当你想重新设计花园时，握紧拳头将触发清理魔法。旧的花朵会在光影中消散，为新的生命腾出空间。
+
+---
+
+## 🎨 定制你的秘密花园
+
+在屏幕右侧的控制面板中，你可以随心所欲地定制这个世界的法则：
+
+* **环境基因 (Biomes)**：
+    * 🌅 **日落 (Sunset)**：温柔的暖色调，如同黄昏时的余晖。
+    * 🌊 **海洋 (Ocean)**：清新的蓝绿色，带来深海般的宁静。
+    * 🌲 **森林 (Forest)**：生机勃勃的翠绿，还原自然的本色。
+    * 💜 **薰衣草 (Lavender)**：梦幻的紫色调，充满浪漫气息。
+
+* **物种多样性 (Species)**：
+    从高贵的**玫瑰**、纯洁的**百合**，到热情的**虞美人**。你可以指定一种花卉，或者让大自然（随机）带给你惊喜。
+
+* **视角切换**：
+    * **AR 视图**：将花朵种植在你真实的房间里（需摄像头权限）。
+    * **艺术视图**：沉浸在抽象的数字风景画中，适合没有摄像头的环境。
+
+---
+
+## ✨ AI 的灵性 (Garden Reflections)
+
+这不仅是一座静态的花园，它拥有灵魂。
+
+点击右下角的 **"花园感悟" (Garden Reflections)** 按钮，Google Gemini AI 将会观察你当前创造的花园景象——它会看你种了多少花、是什么颜色、什么氛围，然后为你写下一句独一无二的诗意感悟。
+
+> *“这里的花朵从不凋零，因为它们生长在你的爱里。”*
+
+---
+
+## 📸 留住美好
+
+当你的花园达到最完美的状态时，别忘了点击菜单中的 **"拍摄" (Capture)** 按钮。
+你可以将这张融合了现实场景与数字繁花的照片保存下来，作为这段静谧时光的见证。
+
+# 在线体验
+
+- 正式版体验：[https://ai.bornforthis.cn/ARGarden/](https://ai.bornforthis.cn/ARGarden/)
+- 提示：请允许浏览器访问摄像头权限以获得最佳 AR 体验。iOS 用户请使用 Safari，Android 用户推荐使用 Chrome。
+
+# Tech Stack
+
+- **Core**: React 19, TypeScript, Vite
+- **AI & Vision**: Google Gemini API (Multimodal), MediaPipe Tasks Vision (Hand/Face Landmarker)
+- **Styling**: Tailwind CSS
+- **Design**: Bornforthis AI Lab
+
+`
+  },
 ];
