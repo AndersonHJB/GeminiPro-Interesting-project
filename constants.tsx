@@ -281,7 +281,7 @@ Timeless Family Album
     githubUrl: 'https://github.com/AndersonHJB/Gemini-ARGarden',
     url: 'https://ai.bornforthis.cn/ARGarden/',
     // articleUrl: 'https://bornforthis.cn/projects/gemini-ar-garden.html',
-    tags: ['AR', 'Gemini', 'Interactive Art', 'Mediapipe', 'React'],
+    tags: ['AR', '数字花园', '治愈', '指尖魔法', '互动艺术', '生活美学', '解压'],
     iconName: 'Sprout',
     status: 'live',
     // status: 'beta',
