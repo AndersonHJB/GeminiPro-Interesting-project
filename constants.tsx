@@ -275,7 +275,7 @@ Timeless Family Album
   },
   {
     id: 'GeminiARGarden',
-    title: 'Gemini AR Garden 🌸',
+    title: '指尖上的灵动花园 🌸',
     thumbnailUrl: 'https://ai.bornforthis.cn/images/P05-GeminiARGarden.png',
     description: '指尖滑过空气，仿佛唤醒了沉睡的星尘。用手势播种，用微笑灌溉，体验 Gemini AI 赋能的增强现实花园。',
     githubUrl: 'https://github.com/AndersonHJB/Gemini-ARGarden',
