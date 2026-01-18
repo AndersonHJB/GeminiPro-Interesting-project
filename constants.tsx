@@ -31,7 +31,7 @@ export const PROJECTS: Project[] = [
 欢迎在 GitHub 上提交 PR 或 Star！
     `,
     url: 'https://gemini.bornforthis.cn/jarvis-holographic-ui/',
-    githubUrl: 'https://github.com/AndersonHJB/jarvis-holographic-ui', 
+    // githubUrl: 'https://github.com/AndersonHJB/jarvis-holographic-ui', 
     articleUrl: 'https://bornforthis.cn/column/Python-Programming-Course/P10-Share/Interesting-project/01-Gemini3-jarvis-holographic-ui.html', 
     thumbnailUrl: 'https://ai.bornforthis.cn/images/P01-%E8%B4%BE%E7%BB%B4%E6%96%AF.png',
     tags: ['React', 'TypeScript', 'Three.js', 'React Three Fiber', 'MediaPipe', 'Tailwind CSS'],
@@ -278,7 +278,7 @@ Timeless Family Album
     title: '指尖上的灵动花园 🌸',
     thumbnailUrl: 'https://ai.bornforthis.cn/images/P05-GeminiARGarden.png',
     description: '指尖滑过空气，仿佛唤醒了沉睡的星尘。用手势播种，用微笑灌溉，体验 Gemini AI 赋能的增强现实花园。',
-    githubUrl: 'https://github.com/AndersonHJB/Gemini-ARGarden',
+    // githubUrl: 'https://github.com/AndersonHJB/Gemini-ARGarden',
     url: 'https://ai.bornforthis.cn/ARGarden/',
     // articleUrl: 'https://bornforthis.cn/projects/gemini-ar-garden.html',
     tags: ['AR', '数字花园', '治愈', '指尖魔法', '互动艺术', '生活美学', '解压'],
