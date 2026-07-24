@@ -53,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => onNavigate('home')}
           >
             <BornForThisLogo className="w-8 h-8 sm:w-10 sm:h-10" />
-            <span className="hidden md:inline text-lg">BornForThis</span>
+            <span className="hidden md:inline text-lg">BornForThis AI实验室</span>
           </div>
           
           {/* Center: Navigation Links (Desktop) */}
