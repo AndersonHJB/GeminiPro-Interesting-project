@@ -30,10 +30,10 @@ export const PROJECTS: Project[] = [
 
 欢迎在 GitHub 上提交 PR 或 Star！
     `,
-    url: '/Projects/jarvis-holographic-ui/',
+    url: '/Projects/jarvis-holographic-ui/index.html',
     // githubUrl: 'https://github.com/AndersonHJB/jarvis-holographic-ui', 
     articleUrl: 'https://bornforthis.cn/column/Python-Programming-Course/P10-Share/Interesting-project/01-Gemini3-jarvis-holographic-ui.html', 
-    thumbnailUrl: 'https://ai.bornforthis.cn/images/P01-%E8%B4%BE%E7%BB%B4%E6%96%AF.png',
+    thumbnailUrl: '/images/P01-贾维斯.png',
     tags: ['React', 'TypeScript', 'Three.js', 'React Three Fiber', 'MediaPipe', 'Tailwind CSS'],
     iconName: 'Cpu',
     status: 'live',
