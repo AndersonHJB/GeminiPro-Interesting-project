@@ -127,7 +127,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'LittleSteps-BigMoments',
     title: '棠棠周岁礼物🎁「相册」',
-    thumbnailUrl: 'http://ai.bornforthis.cn/images/P03-FirstSight.png',
+    thumbnailUrl: '/images/P03-FirstSight.png',
     description: '相册',
     githubUrl: 'https://github.com/AndersonHJB/FirstSight',
     url: 'https://ai.bornforthis.cn/FirstSight/',
