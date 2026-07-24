@@ -116,13 +116,13 @@ export const PROJECTS: Project[] = [
 
 > **Ready? Go!** > 哪怕是为了那一杯免费的奶茶，也请全力以赴吧！
     `,
-    url: 'https://ai.bornforthis.cn/ReadyGoDuel/',
+    url: '/Projects/ReadyGoDuel/index.html',
     // githubUrl: 'https://github.com/AndersonHJB/ReadyGoDuel',
     tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Web Audio API', 'Game Development'],
     iconName: 'Sparkles',
     status: 'live',
     // status: 'beta',
-    thumbnailUrl: 'https://ai.bornforthis.cn/images/P02-ReadyGoDuel.png',
+    thumbnailUrl: '/images/P02-ReadyGoDuel.png',
   },
   {
     id: 'LittleSteps-BigMoments',

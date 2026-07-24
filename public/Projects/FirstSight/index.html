@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>时光 · 家书</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="https://bornforthis.cn/favicon.ico">
+    <!-- Waline Style -->
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <!-- Added Zhi Mang Xing for handwriting feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+    
+    <style>
+      body {
+        background-color: #f9f7f2;
+        color: #3a3a3a;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+      }
+      .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+      
+      /* ==========================================
+         Waline 深度定制：时光家书主题
+         ========================================== */
+      :root {
+        --waline-theme-color: #8c7b75 !important;
+        --waline-active-color: #3a3a3a !important;
+        --waline-bg-color: transparent !important;
+        --waline-bg-color-light: #fdfbf7 !important;
+        --waline-border-color: #e7e5e4 !important;
+        --waline-text-color: #3a3a3a !important;
+        --waline-info-bg-color: #f0efe9 !important;
+        --waline-border: 1px solid var(--waline-border-color);
+      }
+
+      .wl-content { font-family: "Noto Serif SC", serif !important; }
+      .wl-panel {
+        border-radius: 4px !important;
+        border: 1px solid #e7e5e4 !important;
+        background: #fff !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.02) !important;
+      }
+      .wl-header { border-bottom: 1px dashed #e7e5e4 !important; }
+      .wl-input { 
+        font-family: "Noto Serif SC", serif !important; 
+        background: linear-gradient(to bottom, transparent 31px, #f0efe9 31px) !important;
+        background-size: 100% 32px !important;
+        line-height: 32px !important;
+      }
+      .wl-btn {
+        border-radius: 2px !important;
+        font-family: "Noto Serif SC", serif !important;
+        font-weight: 400 !important;
+        letter-spacing: 0.1em !important;
+        text-transform: uppercase !important;
+        font-size: 0.8rem !important;
+      }
+      .wl-btn.primary {
+        background: #3a3a3a !important;
+        border-color: #3a3a3a !important;
+      }
+      .wl-btn.primary:hover {
+        background: #8c7b75 !important;
+        border-color: #8c7b75 !important;
+      }
+      .wl-card {
+        border-bottom: 1px dashed #e7e5e4 !important;
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+      }
+      .wl-nick { 
+        font-family: "Zhi Mang Xing", cursive !important; 
+        font-size: 1.4rem !important;
+        color: #8c7b75 !important;
+      }
+      .wl-time { font-family: "Noto Sans SC", sans-serif !important; opacity: 0.6; }
+      .wl-badge {
+        background: #f0efe9 !important;
+        color: #8c7b75 !important;
+        border-radius: 2px !important;
+        font-size: 0.6rem !important;
+      }
+      .wl-power { display: none !important; }
+    </style>
+
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "react-dom": "https://esm.sh/react-dom@^19.2.3",
+    "vite-plugin-imagemin": "https://esm.sh/vite-plugin-imagemin@^0.6.1",
+    "vite-plugin-image-optimizer": "https://esm.sh/vite-plugin-image-optimizer@^2.0.3",
+    "react-markdown": "https://esm.sh/react-markdown@9?bundle",
+    "@waline/client": "https://esm.sh/@waline/client@^3.8.0",
+    "html-to-image": "https://esm.sh/html-to-image@^1.11.11"
+  }
+}
+</script>
+  <script type="module" crossorigin src="./assets/index-jkzJ9iqB.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/vendor-6Kcdu6yk.js">
+  <link rel="modulepreload" crossorigin href="./assets/react-vendor-CjZCGl2f.js">
+  <link rel="modulepreload" crossorigin href="./assets/waline-BtYTrJwc.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-Bc-8QL_m.css">
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
