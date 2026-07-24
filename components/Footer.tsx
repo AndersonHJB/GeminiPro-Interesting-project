@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
         <div className="flex gap-6">
           <a href="https://github.com/AndersonHJB/" className="text-sm text-slate-500 hover:text-indigo-600 dark:hover:text-white transition-colors">Github</a>
           <a href="https://x.com/huangjiarongbao" className="text-sm text-slate-500 hover:text-indigo-600 dark:hover:text-white transition-colors">Twitter</a>
-          <a href="https://comment.bornforthis.cn/" className="text-sm text-slate-500 hover:text-indigo-600 dark:hover:text-white transition-colors">联系我</a>
+          <a href="https://waline.bornforthis.cn/" className="text-sm text-slate-500 hover:text-indigo-600 dark:hover:text-white transition-colors">联系我</a>
         </div>
       </div>
     </footer>

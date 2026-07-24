@@ -16,7 +16,7 @@ export const WalineSection: React.FC<WalineSectionProps> = ({ path }) => {
     // Initialize Waline
     walineInstanceRef.current = init({
       el: containerRef.current,
-      serverURL: 'https://comment.bornforthis.cn/',
+      serverURL: 'https://waline.bornforthis.cn/',
       path: path, // Use project ID or unique path
       dark: 'html.dark', // Match Tailwind's dark mode selector
       emoji: [

@@ -19,7 +19,7 @@ const NOTICES: Notice[] = [
     id: '1',
     type: 'new',
     content: '🎉 网站全新上线！欢迎投稿你的创意 AI 项目。',
-    link: 'https://comment.bornforthis.cn/',
+    link: 'https://waline.bornforthis.cn/',
     linkText: '立即投稿'
   },
   {
