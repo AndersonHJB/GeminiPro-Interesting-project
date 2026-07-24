@@ -11,7 +11,7 @@ export const PROJECTS: Project[] = [
 
 这是我对未来人机交互界面（HCI）的一次大胆尝试。受《钢铁侠》电影中 Jarvis 系统的启发，我使用 **React Three Fiber** 和 **WebGL** 构建了这个沉浸式的 3D 仪表盘。
 
-![Jarvis Demo](https://gemini.bornforthis.cn/images/P01-%E8%B4%BE%E7%BB%B4%E6%96%AF.png)
+![Jarvis Demo](/images/P01-Jarvis.png)
 
 ## 核心功能
 
@@ -30,7 +30,7 @@ export const PROJECTS: Project[] = [
 
 欢迎在 GitHub 上提交 PR 或 Star！
     `,
-    url: 'https://gemini.bornforthis.cn/jarvis-holographic-ui/',
+    url: '/Projects/jarvis-holographic-ui/',
     // githubUrl: 'https://github.com/AndersonHJB/jarvis-holographic-ui', 
     articleUrl: 'https://bornforthis.cn/column/Python-Programming-Course/P10-Share/Interesting-project/01-Gemini3-jarvis-holographic-ui.html', 
     thumbnailUrl: 'https://ai.bornforthis.cn/images/P01-%E8%B4%BE%E7%BB%B4%E6%96%AF.png',
